@@ -1,0 +1,142 @@
+baseURL: https://mladen.trampic.info/
+languageCode: en-us
+title: Mladen Trampic
+
+# Google Analytics configuration (add your GA ID when ready)
+# services:
+#   googleAnalytics:
+#     id: YOUR-GA-ID
+
+enableRobotsTXT: true
+
+# RSS configuration
+outputFormats:
+  RSS:
+    mediatype: "application/rss+xml"
+    baseName: "feed"  # Changes default filename from index.xml to feed.xml
+
+# Output formats for specific page types
+outputs:
+  home:
+    - HTML
+    - RSS
+  section:
+    - HTML
+    - RSS
+  taxonomy:
+    - HTML
+    - RSS
+
+# Allow raw HTML in content
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+# Suppress warnings
+ignoreLogs: 
+  - 'warning-goldmark-raw-html'
+  - 'warning-partial-superfluous-prefix'
+
+# Congo theme configuration
+module:
+  imports:
+    - path: github.com/jpanther/congo/v2
+      disable: false
+      version: v2.11.0
+
+# Theme-specific configuration
+params:
+  description: "Personal blog of Mladen Trampic - Technology, Development, and Insights"
+  copyright: "&copy; Mladen Trampic 2025-{year}"
+  enableCodeCopy: true
+  enableLightbox: true
+  colorScheme: ocean
+  defaultAppearance: light
+  autoSwitchAppearance: true
+  
+  # Custom CSS (uncomment when you add custom styles)
+  customCSS:
+    - assets/css/custom.css
+  
+  homepage:
+    layout: profile
+    showRecent: true
+  
+  article:
+    showDate: true
+    showAuthor: true
+    showBreadcrumbs: true
+    showDraftLabel: true
+    showEdit: false
+    showTableOfContents: true
+    showReadingTime: true
+    enableLightbox: true
+    sharingLinks: 
+      - twitter
+      - linkedin
+      - reddit
+      
+  # Hide dates and reading time on specific page types
+  pages:
+    showDate: false
+    showReadingTime: false
+    
+  # Specific settings for projects section
+  list:
+    showDate: false
+    showReadingTime: false
+    groupByYear: false
+
+  # Configure the profile mode
+  profileMode:
+    enabled: true
+    title: Mladen Trampic
+    subtitle: "Technology Enthusiast & Developer"
+    imageUrl: "/images/profile.png"
+    imageTitle: Mladen Trampic
+
+  footer:
+    showCopyright: true
+    showThemeAttribution: true
+    showAppearanceSwitcher: true
+    showScrollToTop: true
+
+  social:
+    - name: GitHub
+      url: https://github.com/mtrampic
+      icon: brand-github
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/trampic/
+      icon: brand-linkedin
+    - name: RSS
+      url: /feed.xml
+      icon: rss-simple
+
+languages:
+  en:
+    languageName: English
+    weight: 1
+    params:
+      author:
+        name: Mladen Trampic
+        image: images/profile.png
+        headline: Technology Enthusiast & Developer
+        links:
+          - github: https://github.com/mtrampic
+          - linkedin: https://www.linkedin.com/in/trampic/
+          - rss-simple: /feed.xml
+
+menu:
+  main:
+    - name: Posts
+      url: /posts/
+      weight: 10
+    - name: Projects
+      url: /projects/
+      weight: 20
+    - name: About
+      url: /about/
+      weight: 30
