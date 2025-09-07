@@ -13,6 +13,8 @@ series: []
 
 Amazon Q CLI's agent system allows you to create specialized AI assistants tailored to specific workflows and domains. Instead of using a generic assistant, you can configure agents with custom prompts, tools, and behaviors that understand your project context and requirements. This guide walks through the complete process of creating, configuring, and validating custom Amazon Q CLI agents, from basic JSON structure to advanced configuration options.
 
+For the official documentation on creating custom agents, see the [Amazon Q Developer User Guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-custom-agents.html).
+
 Whether you're building a blog writing assistant, a code review agent, or a DevOps helper, understanding agent configuration will help you maximize Amazon Q's effectiveness in your development workflow.
 
 ## Agent Configuration Structure
