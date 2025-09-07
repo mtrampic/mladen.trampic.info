@@ -3,8 +3,8 @@ title: "Ubiquiti UniFi Cloud Gateway Max BGP S2S VPN with AWS"
 date: 2025-08-30T09:00:48Z
 draft: false
 description: "Setting up BGP site-to-site VPN between Ubiquiti UniFi Cloud Gateway Max and AWS using Transit Gateway for dynamic routing"
-author: "Mladen Trampic & Amazon Q Developer"
-authors: ["mladen-trampic", "amazon-q-developer"]
+author: "Mladen Trampic & Amazon Q Developer CLI"
+authors: ["mladen-trampic", "amazon-q-developer-cli"]
 tags: ["ubiquiti", "unifi", "aws", "bgp", "vpn", "networking", "site-to-site", "transit-gateway"]
 categories: ["networking", "aws"]
 ---

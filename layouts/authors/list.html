@@ -18,6 +18,8 @@
           <a href="{{ .Permalink }}">
             {{ if eq .Title "Mladen Trampic" }}
               <img src="/images/authors/Mladen_Trampic.jpeg" alt="{{ .Title }}" class="w-16 h-16 rounded-full object-cover">
+            {{ else if eq .Title "Amazon Q Developer CLI" }}
+              <img src="/images/authors/AmazonQ_CLI.png" alt="{{ .Title }}" class="w-16 h-16 rounded-full object-cover">
             {{ else }}
               <img src="/images/authors/AmazonQ_CLI.png" alt="{{ .Title }}" class="w-16 h-16 rounded-full object-cover">
             {{ end }}
@@ -32,11 +34,14 @@
           <div class="text-neutral-600 dark:text-neutral-300">
             {{ if eq .Title "Mladen Trampic" }}
               Senior Technical Account Manager for AWS Enterprise Support EMEA, helping customers architect for reliability and cost efficiency.
+            {{ else if eq .Title "Amazon Q Developer CLI" }}
+              AWS's AI-powered coding assistant built in Rust, leveraging Anthropic models for intelligent code assistance and technical guidance.
             {{ else }}
               AWS's AI-powered coding assistant built in Rust, leveraging Anthropic models for intelligent code assistance and technical guidance.
             {{ end }}
           </div>
-          {{ $authorPosts := where site.RegularPages "Params.authors" "intersect" (slice .File.BaseFileName) }}
+          {{ $authorSlug := .File.Dir | strings.TrimSuffix "/" | path.Base }}
+          {{ $authorPosts := where site.RegularPages "Params.authors" "intersect" (slice $authorSlug) }}
           {{ if $authorPosts }}
             <div class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
               {{ len $authorPosts }} {{ if eq (len $authorPosts) 1 }}post{{ else }}posts{{ end }}

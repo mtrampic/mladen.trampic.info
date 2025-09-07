@@ -5,8 +5,8 @@ draft: false
 description: "How to use a custom devcontainer with Amazon Q to streamline blog writing"
 tags: ["devcontainer","amazon-q","hugo","blogging"]
 categories: ["DevOps","Tools"]
-author: "Mladen Trampic & Amazon Q Developer"
-authors: ["mladen-trampic", "amazon-q-developer"]
+author: "Mladen Trampic & Amazon Q Developer CLI"
+authors: ["mladen-trampic", "amazon-q-developer-cli"]
 series: []
 ---
 

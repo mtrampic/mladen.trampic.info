@@ -64,15 +64,15 @@ We maintain full transparency about our collaborative process. Every post clearl
     </tr>
     <tr>
       <td style="width: 80px; padding: 1rem; vertical-align: top;">
-        <a href="/authors/amazon-q-developer/">
+        <a href="/authors/amazon-q-developer-cli/">
           <img src="/images/authors/AmazonQ_CLI.png" 
-               alt="Amazon Q Developer" 
+               alt="Amazon Q Developer CLI" 
                style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
         </a>
       </td>
       <td style="padding: 1rem; vertical-align: top;">
         <h4 style="margin: 0 0 0.5rem 0;">
-          <a href="/authors/amazon-q-developer/" style="text-decoration: none; color: inherit;">Amazon Q Developer</a>
+          <a href="/authors/amazon-q-developer-cli/" style="text-decoration: none; color: inherit;">Amazon Q Developer CLI</a>
         </h4>
         <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
           AWS's AI-powered coding assistant built in Rust, leveraging Anthropic models for intelligent code assistance and technical guidance.
