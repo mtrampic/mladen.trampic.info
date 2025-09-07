@@ -1,0 +1,36 @@
+{
+  "agents": {
+    "blog-assistant": {
+      "config_path": ".amazonq/cli-agents/blog-assistant.json",
+      "trust_policy": "trusted",
+      "auto_approve_tools": true,
+      "default_context": [
+        "project-root/.amazonq/rules",
+        "project-root/.amazonq/project-intelligence",
+        "project-root/content/posts"
+      ]
+    }
+  },
+  "default_agent": "blog-assistant",
+  "trust_settings": {
+    "default_trust_level": "trusted",
+    "auto_approve_trusted_tools": true,
+    "mcp_servers": {
+      "context7": "trusted",
+      "awslabs.aws-documentation-mcp-server": "trusted"
+    }
+  },
+  "content_validation": {
+    "enabled": true,
+    "hooks": [
+      ".amazonq/hooks/content-validation.sh"
+    ]
+  },
+  "hugo_settings": {
+    "content_dir": "content",
+    "static_dir": "static", 
+    "config_file": "config.yaml",
+    "build_drafts": false,
+    "minify": true
+  }
+}

@@ -5,10 +5,11 @@ draft: false
 description: "How to use a custom devcontainer with Amazon Q to streamline blog writing"
 tags: ["devcontainer","amazon-q","hugo","blogging"]
 categories: ["DevOps","Tools"]
+author: "Mladen Trampic & Amazon Q Developer"
 series: []
 ---
 
-# Amazon Q in DevContainer
+## Amazon Q in DevContainer
 
 ## Introduction
 
@@ -39,7 +40,7 @@ Writing and maintaining a technical blog can be time-consuming—drafting outlin
 	"postCreateCommand": "bash -lc 'ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" >> ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile'",
 	"forwardPorts": [1313]
 }
-```
+```json
 3. We mount the user’s AWS credentials and the Amazon Q config directory into `/home/vscode/.aws` and `/home/vscode/.local/share/amazon-q` so you can reuse your existing credentials and settings.
 
 ### Using Amazon Q to Write Posts
@@ -69,4 +70,8 @@ Writing and maintaining a technical blog can be time-consuming—drafting outlin
 ## Conclusion
 
 By bundling Amazon Q into your DevContainer, you get an on-demand AI writing partner in every environment. This setup ensures consistency across machines and speeds up the content creation process—freeing you to focus on ideas and technical depth rather than boilerplate writing.
+
+---
+
+*This post was co-authored with Amazon Q Developer, combining human expertise with AI assistance for technical accuracy and comprehensive coverage.*
 

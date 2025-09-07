@@ -6,7 +6,7 @@ description: "Welcome to my personal blog where I share insights about technolog
 slug: "welcome-to-my-blog"
 tags: ["welcome", "introduction", "blog"]
 categories: ["General"]
-author: "Mladen Trampic"
+author: "Mladen Trampic & Amazon Q Developer"
 showTableOfContents: true
 ---
 
@@ -48,3 +48,7 @@ Thanks for stopping by, and I hope you find something valuable here!
 
 *Happy coding!*  
 Mladen
+
+---
+
+*This blog features content co-authored with Amazon Q Developer, combining human insights with AI assistance for enhanced technical accuracy and comprehensive coverage.*

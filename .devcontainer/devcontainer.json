@@ -8,6 +8,8 @@
 		"ghcr.io/devcontainers/features/aws-cli:1": {},
 		"ghcr.io/devcontainers-extra/features/gh-cli:1": {},
 		"ghcr.io/devcontainers/features/go:1": {},
+		// Docker-in-Docker support
+		"ghcr.io/devcontainers/features/docker-in-docker:2.12.3": {}
 	},
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
@@ -24,5 +26,9 @@
 	// Configure tool-specific properties.
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	// "remoteUser": "root",
+	// Allow the container to run dind in privileged mode
+	"runArgs": [
+		"--privileged"
+	]
 }

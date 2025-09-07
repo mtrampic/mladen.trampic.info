@@ -3,7 +3,7 @@ title: "Ubiquiti UniFi Cloud Gateway Max BGP S2S VPN with AWS"
 date: 2025-08-30T09:00:48Z
 draft: false
 description: "Setting up BGP site-to-site VPN between Ubiquiti UniFi Cloud Gateway Max and AWS using Transit Gateway for dynamic routing"
-author: "mladen-trampic"
+author: "Mladen Trampic & Amazon Q Developer"
 tags: ["ubiquiti", "unifi", "aws", "bgp", "vpn", "networking", "site-to-site", "transit-gateway"]
 categories: ["networking", "aws"]
 ---
@@ -398,7 +398,7 @@ Outputs:
       2. Configure my on-premises router with BGP settings
       3. Test connectivity between networks (192.168.0.0/16 <-> 10.0.0.0/16)
       4. Both NAT Gateways provide redundancy for private subnet internet access
-```
+```bash
 
 ## Step 2: Download VPN Configuration
 
@@ -511,7 +511,7 @@ route-map OUT-PRIMARY permit 10
 route-map OUT-BACKUP permit 10
  set as-path prepend 65000 65000
 !
-```
+```bash
 
 2. **Navigate to Dynamic Routing** in the UniFi Console:
 
@@ -544,7 +544,7 @@ First, verify that the IPSec tunnels are established:
 # SSH to UniFi Gateway and test connectivity to AWS tunnel endpoints
 ping 169.254.224.217
 ping 169.254.252.33
-```
+```bash
 
 ### BGP Status and Debugging
 
@@ -574,7 +574,7 @@ show ip bgp
 
 # Check if specific route is in BGP table
 show ip bgp 192.168.1.0/24
-```
+```bash
 
 ### Route Advertisement Issues
 
@@ -595,7 +595,7 @@ show ip route
 
 # Verify route-maps are applied correctly
 show route-map ALLOW-ALL
-```
+```bash
 
 ### Common Configuration Issues
 
@@ -631,7 +631,7 @@ journalctl -u frr -f
 
 # Restart FRR if needed
 systemctl restart frr
-```
+```bash
 
 ## Conclusion
 
@@ -646,3 +646,7 @@ This setup provides several key benefits for hybrid cloud connectivity:
 **Cost Efficiency**: Using your existing UniFi Gateway Max eliminates the need for additional hardware while providing enterprise-grade VPN capabilities.
 
 With this configuration, my home lab now has seamless, resilient connectivity to AWS with automatic failover and dynamic routing - perfect for hybrid cloud workloads, development environments, and secure access to cloud resources.
+
+---
+
+*This post was co-authored with Amazon Q Developer, combining human expertise with AI assistance for technical accuracy and comprehensive coverage.*
