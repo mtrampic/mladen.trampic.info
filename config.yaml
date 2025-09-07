@@ -45,7 +45,6 @@ module:
   imports:
     - path: github.com/jpanther/congo/v2
       disable: false
-      version: v2.11.0
 
 # Theme-specific configuration
 params:

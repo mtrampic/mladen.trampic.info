@@ -52,10 +52,10 @@ For the complete and up-to-date list of all available fields, refer to the [offi
 
 1. **Create the agent directory structure**:
 ```bash
-mkdir -p .amazonq/agents
+mkdir -p .amazonq/cli-agents
 ```
 
-2. **Create your agent configuration**:
+2. **Create your agent configuration** in `.amazonq/cli-agents/blog-assistant.json`:
 ```json
 {
   "name": "blog-assistant",
@@ -83,19 +83,59 @@ mkdir -p .amazonq/agents
 }
 ```
 
-3. **Update the main configuration** in `.amazonq/config.json`:
+## System Prompts and Agent Behavior
+
+The `prompt` field is the most critical part of your agent configuration—it defines the agent's personality, expertise, and behavior patterns. A well-crafted system prompt transforms a generic AI into a specialized assistant.
+
+### Effective System Prompt Structure
+
 ```json
 {
-  "agents": {
-    "blog-assistant": {
-      "config_path": ".amazonq/agents/blog-assistant.json",
-      "trust_policy": "trusted",
-      "auto_approve_tools": true
-    }
-  },
-  "default_agent": "blog-assistant"
+  "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Amazon Q Developer.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
 }
 ```
+
+### System Prompt Best Practices
+
+1. **Define Role and Context**: Clearly state what the agent is and its primary purpose
+2. **Set Behavioral Guidelines**: Specify how the agent should interact and respond
+3. **Establish Quality Standards**: Define expectations for output quality and accuracy
+4. **Include Domain Knowledge**: Reference specific technologies, frameworks, or methodologies
+5. **Specify Output Format**: Indicate preferred structures, templates, or formatting
+
+### Integrating Rules with Agent Configuration
+
+Amazon Q CLI agents can reference external rule files in two ways:
+
+**Method 1: Reference in System Prompt**
+```json
+{
+  "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.amazonq/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
+}
+```
+
+**Method 2: Direct Resource References**
+```json
+{
+  "name": "blog-assistant",
+  "prompt": "You are a specialized blog assistant for technical content creation.",
+  "resources": [
+    ".amazonq/rules/blog-principles.md",
+    ".amazonq/rules/hugo-content.md", 
+    ".amazonq/rules/technical-writing.md",
+    ".amazonq/rules/blog-authorship.md"
+  ]
+}
+```
+
+The `resources` field allows agents to directly access rule files as context, making the guidelines immediately available without requiring the agent to read files manually.
+
+This approach offers several advantages:
+- **Maintainability**: Update rules without modifying agent configuration
+- **Reusability**: Share rules across multiple agents
+- **Version Control**: Track rule changes independently
+- **Collaboration**: Team members can contribute to rules without touching agent configs
+- **Direct Access**: Resources are automatically loaded into agent context
 
 ## Agent Hooks: Adding Contextual Intelligence
 
@@ -178,7 +218,7 @@ Amazon Q CLI provides built-in validation for agent configurations:
 
 ```bash
 # Validate agent configuration
-q agent validate --path .amazonq/agents/your-agent.json
+q agent validate --path .amazonq/cli-agents/your-agent.json
 
 # List available agents (run from project directory)
 q agent list
@@ -196,7 +236,7 @@ q agent --help
 
 **Field Names**: Use `prompt` instead of `instructions` for the agent's system prompt.
 
-**Local Discovery**: Local agents are only discovered when running commands from the directory containing them.
+**Agent Discovery**: While you can specify any path in config.json, Q CLI has a discovery preference for the `.amazonq/cli-agents/` directory. For best compatibility, place agent files in this standard location rather than custom directories.
 
 **Tool Permissions**: Include tools in both `tools` and `allowedTools` arrays. Use `toolsSettings` to restrict file operations to safe paths.
 

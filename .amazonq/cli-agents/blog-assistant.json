@@ -13,7 +13,29 @@
       "args": ["awslabs.aws-documentation-mcp-server@latest"],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR",
-        "AWS_DOCUMENTATION_PARTITION": "aws"
+        "AWS_DOCUMENTATION_PARTITION": "aws",
+        "AWS_PROFILE": "${AWS_DEFAULT_PROFILE:-default}"
+      },
+      "disabled": false
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"]
+    },
+    "modelcontextprotocol-docs": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/modelcontextprotocol/modelcontextprotocol"
+      ]
+    },
+    "awslabs.aws-pricing-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-pricing-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_PROFILE": "${AWS_DEFAULT_PROFILE:-default}",
+        "AWS_REGION": "us-east-1"
       },
       "disabled": false
     }
@@ -22,21 +44,36 @@
     "fs_read",
     "fs_write", 
     "execute_bash",
+    "thinking",
     "@context7",
-    "@awslabs"
+    "@awslabs",
+    "@brave-search",
+    "@modelcontextprotocol-docs",
+    "@awslabs.aws-pricing-mcp-server"
   ],
   "toolAliases": {
     "research": "@context7",
-    "aws_docs": "@awslabs"
+    "aws_docs": "@awslabs",
+    "aws_pricing": "@awslabs.aws-pricing-mcp-server"
   },
   "allowedTools": [
     "fs_read",
     "fs_write",
     "execute_bash",
+    "thinking",
     "@context7", 
-    "@awslabs"
+    "@awslabs",
+    "@brave-search/brave_web_search",
+    "@modelcontextprotocol-docs/fetch_generic_url_content",
+    "@modelcontextprotocol-docs/search_repo_code",
+    "@modelcontextprotocol-docs/search_repo_docs",
+    "@awslabs.aws-pricing-mcp-server/get_pricing",
+    "@awslabs.aws-pricing-mcp-server/analyze_cdk_project",
+    "@awslabs.aws-pricing-mcp-server/get_bedrock_patterns",
+    "@awslabs.aws-pricing-mcp-server/generate_cost_report"
   ],
   "resources": [
+    "file://.amazonq/rules/blog-principles.md",
     "file://README.md",
     "file://config.yaml",
     "file://.amazonq/rules/*.md",
@@ -60,7 +97,7 @@
     ],
     "userPromptSubmit": [
       {
-        "command": "hugo list drafts",
+        "command": "grep -r 'draft: true' content/posts/ | head -5 || echo 'No drafts found'",
         "timeout_ms": 5000,
         "cache_ttl_seconds": 60
       },
@@ -78,6 +115,22 @@
         "static/**", 
         "archetypes/**",
         ".amazonq/rules/**"
+      ]
+    },
+    "execute_bash": {
+      "alwaysAllow": [
+        {
+          "preset": "readOnly"
+        },
+        {
+          "command": "hugo serve*"
+        },
+        {
+          "command": "hugo version"
+        },
+        {
+          "command": "hugo list*"
+        }
       ]
     }
   }

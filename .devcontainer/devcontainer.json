@@ -8,6 +8,8 @@
 		"ghcr.io/devcontainers/features/aws-cli:1": {},
 		"ghcr.io/devcontainers-extra/features/gh-cli:1": {},
 		"ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/devcontainers/features/node:1": {},
 		// Docker-in-Docker support
 		"ghcr.io/devcontainers/features/docker-in-docker:2.12.3": {}
 	},
@@ -16,7 +18,8 @@
 		"source=${localEnv:HOME}/Library/Application Support/amazon-q,target=/home/vscode/.local/share/amazon-q,type=bind,consistency=cached"
 
 	],
-	"postCreateCommand": "bash -lc 'ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" >> ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile'",
+	"postCreateCommand": "bash -lc 'HUGO_VERSION=0.145.0 && ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then HUGO_ARCH=arm64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else HUGO_ARCH=amd64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${HUGO_ARCH}.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" | tee -a ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile && sudo mkdir -p /home/vscode/.local/lib && sudo chown -R vscode:vscode /home/vscode/.local && pip install uv && hugo mod get github.com/jpanther/congo/v2@v2.11.0'",
+	"postStartCommand": "q settings chat.defaultAgent blog-assistant || true",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
