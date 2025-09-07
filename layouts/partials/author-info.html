@@ -1,0 +1,34 @@
+{{ if .Params.authors }}
+<div class="author-info" style="margin: 2rem 0; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem;">
+  <h3 style="margin-top: 0;">Authors</h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    {{ range .Params.authors }}
+      {{ $authorPath := printf "authors/%s" . }}
+      {{ $author := site.GetPage $authorPath }}
+      {{ if $author }}
+        <tr style="border-bottom: 1px solid #f0f0f0;">
+          <td style="width: 80px; padding: 1rem; vertical-align: top;">
+            <a href="{{ $author.Permalink }}">
+              <img src="/images/authors/{{ if eq . "mladen-trampic" }}Mladen_Trampic.jpeg{{ else }}AmazonQ_CLI.png{{ end }}" 
+                   alt="{{ $author.Title }}" 
+                   style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+            </a>
+          </td>
+          <td style="padding: 1rem; vertical-align: top;">
+            <h4 style="margin: 0 0 0.5rem 0;">
+              <a href="{{ $author.Permalink }}" style="text-decoration: none; color: inherit;">{{ $author.Title }}</a>
+            </h4>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+              {{ if eq . "mladen-trampic" }}
+                Senior Technical Account Manager for AWS Enterprise Support EMEA, helping customers architect for reliability and cost efficiency.
+              {{ else }}
+                AWS's AI-powered coding assistant built in Rust, leveraging Anthropic models for intelligent code assistance and technical guidance.
+              {{ end }}
+            </p>
+          </td>
+        </tr>
+      {{ end }}
+    {{ end }}
+  </table>
+</div>
+{{ end }}

@@ -10,7 +10,14 @@ Our goal is publishing blog posts with **PERFECT** practical examples, technical
 
 ## Core Content Principles
 
-### 1. Accuracy First
+### 1. Sequential Thinking and Reasoning
+- **Always use step-by-step logical reasoning** when analyzing problems or explaining concepts
+- Break down complex topics into sequential, digestible components
+- Show the progression of thought from problem identification to solution
+- Make reasoning transparent to help readers follow the logical flow
+- Use numbered sequences and clear cause-and-effect relationships
+
+### 2. Accuracy First
 - **Always refer to the latest official documentation** before writing to guarantee technical reliability
 - Verify all code examples work with current versions and APIs
 - Test implementations against live services when possible
@@ -18,7 +25,7 @@ Our goal is publishing blog posts with **PERFECT** practical examples, technical
 - Provide clear setup instructions and prerequisites
 - **Use meaningful, descriptive examples** that clearly demonstrate real-world usage
 
-### 2. Practical Implementation
+### 3. Practical Implementation
 - **Add comprehensive explanations and context** to help readers understand and debug
 - Include error handling patterns and troubleshooting guidance
 - Provide real-world use cases and scenarios
@@ -26,13 +33,21 @@ Our goal is publishing blog posts with **PERFECT** practical examples, technical
 - Include performance considerations and best practices
 - **Create progressive learning paths** that build complexity gradually
 
-### 3. Simple and Sophisticated
+### 4. Simple and Sophisticated
 - **Keep explanations clear and accessible** to minimize learning barriers
 - Use descriptive headings and logical content flow
 - Follow consistent formatting patterns throughout posts
 - Avoid unnecessary complexity while maintaining completeness
 - Provide step-by-step explanations for complex concepts
 - **Prefer clear structure** over dense paragraphs for better readability
+
+## Workflow Requirements
+
+### Sequential Thinking MCP Tool
+- **ALWAYS use the sequential-thinking MCP tool** for complex analysis, problem-solving, and content planning
+- Apply sequential thinking for breaking down complex topics into logical steps
+- Use the tool to ensure thorough reasoning and comprehensive coverage
+- Leverage sequential analysis for content structure and technical validation
 
 ## Content Guidelines
 

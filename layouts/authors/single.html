@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article>
+  <header class="max-w-prose">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title | emojify }}
+    </h1>
+  </header>
+  
+  <section class="max-w-prose prose dark:prose-invert">
+    {{ .Content | emojify }}
+  </section>
+  
+  {{ $authorSlug := .File.Dir | strings.TrimSuffix "/" | path.Base }}
+  {{ $authorPosts := where site.RegularPages "Params.authors" "intersect" (slice $authorSlug) }}
+  {{ if $authorPosts }}
+    <section class="max-w-prose mt-8">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral mb-4">Posts by {{ .Title }}</h2>
+      <div class="space-y-4">
+        {{ range $authorPosts }}
+          <article class="border-b border-neutral-200 dark:border-neutral-700 pb-4">
+            <h3 class="text-lg font-semibold mb-2">
+              <a href="{{ .Permalink }}" class="text-neutral-900 dark:text-neutral hover:text-primary-600 dark:hover:text-primary-400 no-underline">
+                {{ .Title }}
+              </a>
+            </h3>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">
+              {{ .Date.Format "January 2, 2006" }}
+            </div>
+            {{ with .Params.description }}
+              <p class="text-neutral-600 dark:text-neutral-300">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ else }}
+    <section class="max-w-prose mt-8">
+      <p class="text-neutral-600 dark:text-neutral-300">Debug: Looking for author slug "{{ $authorSlug }}"</p>
+    </section>
+  {{ end }}
+</article>
+{{ end }}

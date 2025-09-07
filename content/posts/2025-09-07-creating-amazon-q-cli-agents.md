@@ -4,7 +4,7 @@ date: 2025-09-07T09:57:00Z
 draft: false
 tags: ["AWS", "Amazon Q", "CLI", "AI", "Development Tools"]
 categories: ["Development"]
-author: "Mladen Trampic & Amazon Q Developer"
+authors: ["mladen-trampic", "amazon-q-developer"]
 description: "Learn how to create and configure custom Amazon Q CLI agents with proper JSON structure and validation commands."
 series: []
 ---

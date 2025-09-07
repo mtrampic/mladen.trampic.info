@@ -9,6 +9,16 @@ title: Mladen Trampic
 
 enableRobotsTXT: true
 
+# Taxonomies configuration
+taxonomies:
+  tag: tags
+  category: categories
+  author: authors
+
+# Preserve taxonomy names and disable pluralization
+pluralizeListTitles: false
+preserveTaxonomyNames: true
+
 # RSS configuration
 outputFormats:
   RSS:
@@ -133,9 +143,9 @@ menu:
     - name: Posts
       url: /posts/
       weight: 10
-    - name: Projects
-      url: /projects/
-      weight: 20
+    - name: Authors
+      url: /authors/
+      weight: 25
     - name: About
       url: /about/
       weight: 30

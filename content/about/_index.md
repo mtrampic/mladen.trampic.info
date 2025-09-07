@@ -1,34 +1,83 @@
 ---
 title: "About"
-description: "Learn more about Mladen Trampic"
+description: "About this co-authored technical blog"
 showDate: false
 showReadingTime: false
 showTableOfContents: false
 ---
 
-# About Me
+Welcome to a unique technical blog where human expertise meets AI assistance. This is a co-authored publication featuring collaborative content between **Mladen Trampic** and **Amazon Q Developer**.
 
-Welcome to my personal blog! I'm Mladen Trampic, a technology enthusiast and developer passionate about creating innovative solutions and sharing knowledge with the community.
+## Our Collaborative Approach
 
-## What I Do
+Every blog post on this site is the result of a collaborative writing process that combines:
 
-- **Software Development**: Building robust applications and systems
-- **Technology Exploration**: Always learning and experimenting with new technologies
-- **Problem Solving**: Tackling complex challenges with creative solutions
-- **Knowledge Sharing**: Writing about my experiences and insights
+- **Human Perspective**: Real-world experience, practical insights, and professional expertise
+- **AI Enhancement**: Research assistance, technical validation, and comprehensive coverage
+- **Quality Assurance**: Fact-checking, documentation verification, and structured presentation
 
-## Interests
+## What You Can Expect
 
-- Cloud Computing & DevOps
-- Software Architecture
-- Modern Development Practices
-- Open Source Projects
-- Technology Trends
+### Technical Accuracy
+All content is thoroughly researched using official documentation and tested implementations. We prioritize accuracy over speed, ensuring every tutorial and guide works as described.
 
-## Get In Touch
+### Practical Focus
+Our posts emphasize real-world applications with complete, working examples. No placeholder code or theoretical concepts without practical implementation.
 
-Feel free to connect with me through any of the social links below. I'm always interested in discussing technology, collaborating on projects, or just having a good conversation about the latest developments in our field.
+### Progressive Learning
+Content is structured to accommodate both beginners and experienced practitioners, with clear explanations and step-by-step guidance.
+
+### Transparency
+We maintain full transparency about our collaborative process. Every post clearly indicates co-authorship, demonstrating how human expertise and AI assistance can work together effectively.
+
+## Content Areas
+
+- **AWS & Cloud Computing** - Architecture, best practices, and hands-on tutorials
+- **Development Tools** - CLI tools, automation, and productivity enhancers  
+- **DevOps & Infrastructure** - Modern deployment practices and tooling
+- **AI-Enhanced Development** - Exploring the intersection of AI and software development
 
 ---
 
-*This blog is where I share my thoughts, experiences, and learnings from my journey in technology. I hope you find something useful here!*
+## Meet the Authors
+
+*This blog represents an innovative approach to technical content creation, showcasing the potential of human-AI collaboration in knowledge sharing.*
+
+<div style="margin: 2rem 0; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem;">
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr style="border-bottom: 1px solid #f0f0f0;">
+      <td style="width: 80px; padding: 1rem; vertical-align: top;">
+        <a href="/authors/mladen-trampic/">
+          <img src="/images/authors/Mladen_Trampic.jpeg" 
+               alt="Mladen Trampic" 
+               style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+        </a>
+      </td>
+      <td style="padding: 1rem; vertical-align: top;">
+        <h4 style="margin: 0 0 0.5rem 0;">
+          <a href="/authors/mladen-trampic/" style="text-decoration: none; color: inherit;">Mladen Trampic</a>
+        </h4>
+        <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+          Senior Technical Account Manager for AWS Enterprise Support EMEA, helping customers architect for reliability and cost efficiency.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 80px; padding: 1rem; vertical-align: top;">
+        <a href="/authors/amazon-q-developer/">
+          <img src="/images/authors/AmazonQ_CLI.png" 
+               alt="Amazon Q Developer" 
+               style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+        </a>
+      </td>
+      <td style="padding: 1rem; vertical-align: top;">
+        <h4 style="margin: 0 0 0.5rem 0;">
+          <a href="/authors/amazon-q-developer/" style="text-decoration: none; color: inherit;">Amazon Q Developer</a>
+        </h4>
+        <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">
+          AWS's AI-powered coding assistant built in Rust, leveraging Anthropic models for intelligent code assistance and technical guidance.
+        </p>
+      </td>
+    </tr>
+  </table>
+</div>
