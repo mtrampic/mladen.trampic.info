@@ -268,6 +268,8 @@ For deeper insights into Amazon Q Developer agents and advanced configurations, 
 
 Custom Amazon Q CLI agents transform generic AI assistance into specialized, context-aware helpers tailored to your specific workflows. By understanding the JSON configuration structure and validation process, you can create agents that understand your project requirements and provide more relevant assistance. Start with simple configurations and gradually add advanced features like custom tools and MCP servers as your needs evolve.
 
+**Want to see this in action?** Check out the complete project structure and agent configurations used for this blog at: https://github.com/mtrampic/mladen.trampic.info
+
 Next steps: experiment with different prompt strategies, explore MCP server integration, and consider creating multiple agents for different aspects of your development workflow.
 
 ---
