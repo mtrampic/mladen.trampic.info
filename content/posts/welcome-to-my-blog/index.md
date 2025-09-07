@@ -6,6 +6,7 @@ description: "Welcome to my personal blog where I share insights about technolog
 slug: "welcome-to-my-blog"
 tags: ["welcome", "introduction", "blog"]
 categories: ["General"]
+author: "Mladen Trampic & Amazon Q Developer"
 authors: ["mladen-trampic", "amazon-q-developer"]
 showTableOfContents: true
 ---
