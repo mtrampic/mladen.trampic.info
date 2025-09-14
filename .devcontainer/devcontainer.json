@@ -15,10 +15,10 @@
 	},
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/Library/Application Support/amazon-q,target=/home/vscode/.local/share/amazon-q,type=bind,consistency=cached"
-
+		"source=${localEnv:HOME}/Library/Application Support/amazon-q,target=/home/vscode/.local/share/amazon-q,type=bind,consistency=cached",
+		"source=memory-volume,target=/home/vscode/.memory,type=volume"
 	],
-	"postCreateCommand": "bash -lc 'HUGO_VERSION=0.145.0 && ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then HUGO_ARCH=arm64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else HUGO_ARCH=amd64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${HUGO_ARCH}.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" | tee -a ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile && sudo mkdir -p /home/vscode/.local/lib && sudo chown -R vscode:vscode /home/vscode/.local && pip install uv && hugo mod get github.com/jpanther/congo/v2@v2.11.0'",
+	"postCreateCommand": "bash -lc 'HUGO_VERSION=0.145.0 && ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then HUGO_ARCH=arm64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else HUGO_ARCH=amd64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${HUGO_ARCH}.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" | tee -a ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile && sudo mkdir -p /home/vscode/.local/lib && sudo chown -R vscode:vscode /home/vscode/.local && pip install uv && uv tool install ruff && hugo mod get github.com/jpanther/congo/v2@v2.11.0'",
 	"postStartCommand": "q settings chat.defaultAgent blog-assistant || true",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
