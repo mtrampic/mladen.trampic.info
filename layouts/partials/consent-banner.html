@@ -1,0 +1,48 @@
+<div id="consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #333; color: white; padding: 15px; text-align: center; z-index: 1000; display: none;">
+  <p style="margin: 0 0 10px 0;">This site uses cookies for analytics to improve your experience. 
+    <a href="/privacy" style="color: #4a9eff;">Privacy Policy</a>
+  </p>
+  <button onclick="acceptConsent()" style="background: #4a9eff; color: white; border: none; padding: 8px 16px; margin: 0 5px; cursor: pointer; border-radius: 4px;">Accept</button>
+  <button onclick="declineConsent()" style="background: #666; color: white; border: none; padding: 8px 16px; margin: 0 5px; cursor: pointer; border-radius: 4px;">Decline</button>
+</div>
+
+<script>
+function showConsentBanner() {
+  if (!localStorage.getItem('consent')) {
+    document.getElementById('consent-banner').style.display = 'block';
+  }
+}
+
+function acceptConsent() {
+  localStorage.setItem('consent', 'accepted');
+  document.getElementById('consent-banner').style.display = 'none';
+  loadAnalytics();
+}
+
+function declineConsent() {
+  localStorage.setItem('consent', 'declined');
+  document.getElementById('consent-banner').style.display = 'none';
+}
+
+function loadAnalytics() {
+  if (localStorage.getItem('consent') === 'accepted') {
+    // Load Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DEJCX64SMQ');
+    
+    // Load GA script
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DEJCX64SMQ';
+    document.head.appendChild(script);
+  }
+}
+
+// Show banner on page load
+document.addEventListener('DOMContentLoaded', function() {
+  showConsentBanner();
+  loadAnalytics(); // Load if already consented
+});
+</script>
