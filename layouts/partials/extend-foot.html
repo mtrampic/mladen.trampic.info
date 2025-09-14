@@ -1,0 +1,3 @@
+{{ if or .IsHome (eq .Section "posts") (eq .Section "authors") .IsPage }}
+{{ partial "comments.html" . }}
+{{ end }}

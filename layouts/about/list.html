@@ -9,5 +9,9 @@
   <section class="max-w-prose prose dark:prose-invert">
     {{ .Content | emojify }}
   </section>
+
+  {{ if .Params.showComments }}
+    {{ partial "comments.html" . }}
+  {{ end }}
 </article>
 {{ end }}

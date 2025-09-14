@@ -1,0 +1,14 @@
+{{ define "main" }}
+  {{ $partial := printf "home/%s.html" site.Params.homepage.layout }}
+  {{ if templates.Exists (printf "partials/%s" $partial) }}
+    {{ partial $partial . }}
+  {{ else }}
+    {{ partial "home/profile.html" . }}
+  {{ end }}
+  
+  {{ if .Params.showComments }}
+    <div class="max-w-prose mx-auto">
+      {{ partial "comments.html" . }}
+    </div>
+  {{ end }}
+{{ end }}

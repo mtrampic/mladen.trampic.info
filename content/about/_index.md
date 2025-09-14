@@ -4,6 +4,7 @@ description: "About this co-authored technical blog"
 showDate: false
 showReadingTime: false
 showTableOfContents: false
+showComments: true
 ---
 
 Welcome to a unique technical blog where human expertise meets AI assistance. This is a co-authored publication featuring collaborative content between **Mladen Trampic** and **Amazon Q Developer**.

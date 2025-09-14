@@ -52,4 +52,8 @@
     </article>
   {{ end }}
 </section>
+
+{{ if .Params.showComments }}
+  {{ partial "comments.html" . }}
+{{ end }}
 {{ end }}

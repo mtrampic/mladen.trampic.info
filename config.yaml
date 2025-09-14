@@ -82,6 +82,7 @@ params:
     showEdit: false
     showTableOfContents: true
     showReadingTime: true
+    showComments: true
     enableLightbox: true
     sharingLinks: 
       - twitter
