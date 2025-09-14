@@ -1,0 +1,44 @@
+<div id="post-voting" style="text-align: center; margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+  <p>Was this post helpful?</p>
+  <button onclick="vote('up')" id="vote-up" style="background: #28a745; color: white; border: none; padding: 8px 16px; margin: 0 5px; cursor: pointer; border-radius: 4px;">
+    👍 Helpful (<span id="up-count">0</span>)
+  </button>
+  <button onclick="vote('down')" id="vote-down" style="background: #dc3545; color: white; border: none; padding: 8px 16px; margin: 0 5px; cursor: pointer; border-radius: 4px;">
+    👎 Not helpful (<span id="down-count">0</span>)
+  </button>
+</div>
+
+<script>
+function vote(type) {
+  const postUrl = window.location.pathname;
+  const key = `vote_${postUrl}_${type}`;
+  
+  if (localStorage.getItem(key)) {
+    alert('You already voted on this post!');
+    return;
+  }
+  
+  // Store vote locally
+  localStorage.setItem(key, 'true');
+  
+  // Update display
+  const countEl = document.getElementById(type + '-count');
+  const currentCount = parseInt(countEl.textContent);
+  countEl.textContent = currentCount + 1;
+  
+  // Disable buttons
+  document.getElementById('vote-up').disabled = true;
+  document.getElementById('vote-down').disabled = true;
+  
+  alert('Thanks for your feedback!');
+}
+
+// Load existing votes on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const postUrl = window.location.pathname;
+  if (localStorage.getItem(`vote_${postUrl}_up`) || localStorage.getItem(`vote_${postUrl}_down`)) {
+    document.getElementById('vote-up').disabled = true;
+    document.getElementById('vote-down').disabled = true;
+  }
+});
+</script>
