@@ -2,10 +2,10 @@ baseURL: https://mladen.trampic.info/
 languageCode: en-us
 title: Mladen Trampic
 
-# Google Analytics configuration (add your GA ID when ready)
-# services:
-#   googleAnalytics:
-#     id: YOUR-GA-ID
+# Google Analytics configuration
+services:
+  googleAnalytics:
+    id: G-DEJCX64SMQ
 
 enableRobotsTXT: true
 
