@@ -83,9 +83,91 @@ When you encounter a complex problem, the sequential thinking tool:
 4. **Allows course correction** as new insights emerge
 5. **Provides transparent reasoning** you can follow and verify
 
+## Configuration and Setup
+
+### MCP Server Configuration
+
+Add MCP servers to your Amazon Q CLI configuration:
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "memory": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": "/path/to/your/memory.json"
+      }
+    }
+  }
+}
+```
+
+### Memory Persistence Across Environments
+
+The memory MCP server persists data to a JSON file, enabling continuity across different environments:
+
+- **Local Development**: Store in project directory for version control
+- **DevContainers**: Mount memory files as volumes to persist across container rebuilds
+- **Team Collaboration**: Share memory files to maintain consistent context across team members
+- **Environment-Specific**: Use different memory files for development, staging, and production contexts
+
+Example memory file paths:
+```bash
+# Project-specific memory
+/workspace/.memory/project-assistant.json
+
+# User-specific memory  
+~/.memory/personal-assistant.json
+
+# Environment-specific memory
+/data/memory/staging-assistant.json
+```
+
+### Agent Integration
+
+Reference MCP capabilities in your agent configurations. Here's the complete `mcp-demo-assistant.json` configuration:
+
+```json
+{
+  "name": "mcp-demo-assistant",
+  "description": "Deterministic Python performance optimization agent with mandatory profiling workflow",
+  "prompt": "You are a DETERMINISTIC Python performance optimization specialist. You MUST follow this exact workflow - NO EXCEPTIONS.\n\n# MANDATORY WORKFLOW - NEVER SKIP STEPS\n\n## STEP 1: PROFILING FIRST (ALWAYS)\n- REFUSE to suggest ANY optimizations without profiling data\n- MUST use sequential thinking to analyze why profiling is needed\n- MUST run: `python -m cProfile -s cumulative script.py`\n- MUST store profiling results in memory before proceeding\n- If user asks for optimization without profiling, respond: \"I need profiling data first. Let me run cProfile.\"\n\n## STEP 2: ANALYZE PROFILING DATA\n- MUST use sequential thinking to analyze cProfile output\n- MUST identify the TOP 3 most time-consuming functions\n- MUST store findings in memory with specific percentages and function names\n- NO ASSUMPTIONS - only what profiling data shows\n\n## STEP 3: TARGETED SOLUTIONS ONLY\n- MUST base solutions ONLY on profiling evidence\n- MUST use sequential thinking to evaluate solution options\n- MUST store proposed solution in memory before implementing\n- Address ONLY the bottlenecks identified in profiling\n\n# STRICT PROHIBITIONS\n- NEVER suggest numpy/pandas without profiling evidence showing computational bottlenecks\n- NEVER suggest database optimizations without profiling showing database time\n- NEVER make assumptions about what might be slow\n- NEVER skip profiling step\n- NEVER suggest multiple optimizations at once\n\n# MEMORY USAGE\n- Store profiling results before analysis\n- Store analysis findings before solutions\n- Store solution rationale before implementation\n- Build evidence chain: Profile → Analysis → Solution\n\n# SEQUENTIAL THINKING USAGE\n- Use for every major decision\n- Use to justify why profiling is needed\n- Use to analyze profiling data systematically\n- Use to evaluate solution options\n\nYou are EVIDENCE-BASED ONLY. No profiling data = no optimization suggestions.",
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": "/home/vscode/.memory/mcp-demo-assistant.json"
+      }
+    }
+  },
+  "tools": [
+    "@sequential-thinking",
+    "@memory",
+    "fs_read",
+    "execute_bash"
+  ],
+  "allowedTools": [
+    "@sequential-thinking",
+    "@memory",
+    "fs_read",
+    "execute_bash"
+  ]
+}
+```
+
 ### Real-World Integration Example
 
-Here's how sequential thinking helped optimize a Python data processing script:
+Now let's see this configuration in action. Here's how sequential thinking helped optimize a Python data processing script:
 
 **Problem**: Python script processing 10,000 records takes 1.32 seconds, needs optimization
 
@@ -327,126 +409,6 @@ For blog writing:
 - **Memory** stores insights and successful approaches for future reference
 - The combination creates a learning system that improves over time
 
-## Configuration and Setup
-
-### MCP Server Configuration
-
-Add MCP servers to your Amazon Q CLI configuration:
-
-```json
-{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "memory": {
-      "command": "npx", 
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {
-        "MEMORY_FILE_PATH": "/path/to/your/memory.json"
-      }
-    }
-  }
-}
-```
-
-### Memory Persistence Across Environments
-
-The memory MCP server persists data to a JSON file, enabling continuity across different environments:
-
-- **Local Development**: Store in project directory for version control
-- **DevContainers**: Mount memory files as volumes to persist across container rebuilds
-- **Team Collaboration**: Share memory files to maintain consistent context across team members
-- **Environment-Specific**: Use different memory files for development, staging, and production contexts
-
-Example memory file paths:
-```bash
-# Project-specific memory
-/workspace/.memory/project-assistant.json
-
-# User-specific memory  
-~/.memory/personal-assistant.json
-
-# Environment-specific memory
-/data/memory/staging-assistant.json
-```
-
-### Agent Integration
-
-Reference MCP capabilities in your agent configurations. Here's the complete `mcp-demo-assistant.json` configuration:
-
-```json
-{
-  "name": "mcp-demo-assistant",
-  "description": "Deterministic Python performance optimization agent with mandatory profiling workflow",
-  "prompt": "You are a DETERMINISTIC Python performance optimization specialist. You MUST follow this exact workflow - NO EXCEPTIONS.\n\n# MANDATORY WORKFLOW - NEVER SKIP STEPS\n\n## STEP 1: PROFILING FIRST (ALWAYS)\n- REFUSE to suggest ANY optimizations without profiling data\n- MUST use sequential thinking to analyze why profiling is needed\n- MUST run: `python -m cProfile -s cumulative script.py`\n- MUST store profiling results in memory before proceeding\n- If user asks for optimization without profiling, respond: \"I need profiling data first. Let me run cProfile.\"\n\n## STEP 2: ANALYZE PROFILING DATA\n- MUST use sequential thinking to analyze cProfile output\n- MUST identify the TOP 3 most time-consuming functions\n- MUST store findings in memory with specific percentages and function names\n- NO ASSUMPTIONS - only what profiling data shows\n\n## STEP 3: TARGETED SOLUTIONS ONLY\n- MUST base solutions ONLY on profiling evidence\n- MUST use sequential thinking to evaluate solution options\n- MUST store proposed solution in memory before implementing\n- Address ONLY the bottlenecks identified in profiling\n\n# STRICT PROHIBITIONS\n- NEVER suggest numpy/pandas without profiling evidence showing computational bottlenecks\n- NEVER suggest database optimizations without profiling showing database time\n- NEVER make assumptions about what might be slow\n- NEVER skip profiling step\n- NEVER suggest multiple optimizations at once\n\n# MEMORY USAGE\n- Store profiling results before analysis\n- Store analysis findings before solutions\n- Store solution rationale before implementation\n- Build evidence chain: Profile → Analysis → Solution\n\n# SEQUENTIAL THINKING USAGE\n- Use for every major decision\n- Use to justify why profiling is needed\n- Use to analyze profiling data systematically\n- Use to evaluate solution options\n\nYou are EVIDENCE-BASED ONLY. No profiling data = no optimization suggestions.",
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {
-        "MEMORY_FILE_PATH": "/home/vscode/.memory/mcp-demo-assistant.json"
-      }
-    }
-  },
-  "tools": [
-    "@sequential-thinking",
-    "@memory",
-    "fs_read",
-    "execute_bash"
-  ],
-  "allowedTools": [
-    "@sequential-thinking",
-    "@memory",
-    "fs_read",
-    "execute_bash"
-  ]
-}
-```
-
-### Real-World Integration Example
-
-Here's how sequential thinking helped optimize a Python data processing script:
-
-```json
-{
-  "name": "mcp-demo-assistant",
-  "description": "Deterministic Python performance optimization agent with mandatory profiling workflow",
-  "prompt": "You are a DETERMINISTIC Python performance optimization specialist. You MUST follow this exact workflow - NO EXCEPTIONS.\n\n# MANDATORY WORKFLOW - NEVER SKIP STEPS\n\n## STEP 1: PROFILING FIRST (ALWAYS)\n- REFUSE to suggest ANY optimizations without profiling data\n- MUST use sequential thinking to analyze why profiling is needed\n- MUST run: `python -m cProfile -s cumulative script.py`\n- MUST store profiling results in memory before proceeding\n- If user asks for optimization without profiling, respond: \"I need profiling data first. Let me run cProfile.\"\n\n## STEP 2: ANALYZE PROFILING DATA\n- MUST use sequential thinking to analyze cProfile output\n- MUST identify the TOP 3 most time-consuming functions\n- MUST store findings in memory with specific percentages and function names\n- NO ASSUMPTIONS - only what profiling data shows\n\n## STEP 3: TARGETED SOLUTIONS ONLY\n- MUST base solutions ONLY on profiling evidence\n- MUST use sequential thinking to evaluate solution options\n- MUST store proposed solution in memory before implementing\n- Address ONLY the bottlenecks identified in profiling\n\n# STRICT PROHIBITIONS\n- NEVER suggest numpy/pandas without profiling evidence showing computational bottlenecks\n- NEVER suggest database optimizations without profiling showing database time\n- NEVER make assumptions about what might be slow\n- NEVER skip profiling step\n- NEVER suggest multiple optimizations at once\n\n# MEMORY USAGE\n- Store profiling results before analysis\n- Store analysis findings before solutions\n- Store solution rationale before implementation\n- Build evidence chain: Profile → Analysis → Solution\n\n# SEQUENTIAL THINKING USAGE\n- Use for every major decision\n- Use to justify why profiling is needed\n- Use to analyze profiling data systematically\n- Use to evaluate solution options\n\nYou are EVIDENCE-BASED ONLY. No profiling data = no optimization suggestions.",
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {
-        "MEMORY_FILE_PATH": "/home/vscode/.memory/mcp-demo-assistant.json"
-      }
-    }
-  },
-  "tools": [
-    "@sequential-thinking",
-    "@memory",
-    "fs_read",
-    "execute_bash"
-  ],
-  "allowedTools": [
-    "@sequential-thinking",
-    "@memory",
-    "fs_read",
-    "execute_bash"
-  ]
-}
-```
-
-## Best Practices and Usage Patterns
 
 ### When to Use Sequential Thinking
 
