@@ -46,7 +46,7 @@ Aurora Serverless V2 automatically scales database capacity up and down based on
 **Key Characteristics:**
 - **Incremental Scaling**: Unlike Serverless v1 which doubles capacity, v2 scales incrementally starting from 0.5 ACU increments. Larger current capacity enables larger scaling increments for faster scaling
 - **Pay-per-Use**: Charged only for consumed capacity per second
-- **Sub-second Scaling**: Rapid capacity adjustments with no downtime or connection drops
+- **Rapid Scaling**: Fast capacity adjustments with no downtime or connection drops (scaling speed depends on current capacity, with faster scaling at higher ACUs)
 - **Pause Capability**: Can scale to zero during idle periods (note: resuming from 0 ACUs incurs a cold-start delay of 5-15 seconds, making this feature best suited for development or non-critical workloads. Open connections, such as those from RDS Proxy, prevent auto-pause)
 - **Simplified Management**: No instance sizing decisions required
 - **Resource Mapping**: Each ACU provides approximately 2 GiB of memory with connection limits typically defaulting to 2000 (capped when minimum ACU is 0 or 0.5)
@@ -200,7 +200,7 @@ The choice between these approaches depends on your team's operational preferenc
 - **Shared Resource Concerns**: Dynamic scaling might introduce timing-based vulnerabilities
 - **Connection Pool Complexity**: Autoscaling can complicate connection management
 
-Both options provide equivalent security capabilities with proper implementation.
+Both options provide equivalent security capabilities with proper implementation, though Serverless V2 has some feature limitations like Database Activity Streams.
 
 ### Reliability
 
@@ -218,13 +218,17 @@ Both options provide equivalent security capabilities with proper implementation
 **Strengths:**
 - **Dynamic Scaling**: Automatically handles traffic spikes without manual intervention
 - **Improved Fault Tolerance**: Can scale up to handle increased load from failures
-- **Reduced Single Points of Failure**: Automatic scaling reduces capacity-related outages
+- **Reduced Capacity-Related Outages**: Automatic scaling reduces capacity-related incidents (note: true fault tolerance requires Multi-AZ deployment)
 
 **Challenges:**
 - **Scaling Limits**: Maximum ACU limits could constrain very large spikes
 - **Complexity**: More moving parts in the scaling mechanism
 
 Dynamic scaling significantly improves reliability for variable workloads, while provisioned instances offer predictable performance guarantees.
+
+**Mixed Configuration Options**: Aurora clusters can combine provisioned writers with Serverless V2 readers, providing a migration path and cost optimization for read-heavy workloads.
+
+**Global Database for DR**: Aurora Global Database enables cross-region disaster recovery with Serverless V2 readers in secondary regions, enhancing overall reliability for multi-tenant applications.
 
 ### Performance Efficiency
 
@@ -275,6 +279,8 @@ Dynamic scaling provides better overall performance efficiency for multi-tenant 
 - **Unpredictable Costs**: Variable costs based on actual usage
 
 For most multi-tenant scenarios with variable usage patterns, Serverless V2 provides significant cost advantages through pay-per-use pricing and automatic scaling.
+
+**I/O-Optimized Consideration**: Aurora I/O-Optimized can be more cost-effective when I/O costs represent approximately 25% or more of your total Aurora spend, providing predictable pricing for I/O-intensive multi-tenant workloads.
 
 ### Sustainability
 
@@ -360,6 +366,12 @@ def get_tenant_connection(tenant_id):
 - Set up alerts for unusual scaling patterns
 - Track connection counts per tenant database
 - Monitor autovacuum performance across databases
+
+#### Operational Guardrails
+- **Per-Tenant Safeguards**: Configure `statement_timeout` and `idle_in_transaction_session_timeout` to prevent runaway queries
+- **Application-Layer Controls**: Implement rate limiting and connection pooling per tenant
+- **Database Observability**: Use `pg_stat_database` and `pg_stat_statements` combined with ACU metrics (`ServerlessDatabaseCapacity`, `ACUUtilization`) for comprehensive monitoring
+- **Connection Planning**: Note that `max_connections` is derived from memory and effectively tied to max ACU configuration
 
 ### Common Pitfalls to Avoid
 
