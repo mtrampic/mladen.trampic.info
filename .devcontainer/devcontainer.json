@@ -32,6 +32,7 @@
 	// "remoteUser": "root",
 	// Allow the container to run dind in privileged mode
 	"runArgs": [
-		"--privileged"
+		"--privileged",
+		"--env-file", ".devcontainer/devcontainer.env"
 	]
 }

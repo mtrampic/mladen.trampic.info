@@ -1,0 +1,18 @@
+/* Make Mermaid diagrams larger and more readable */
+.mermaid {
+    font-size: 16px !important;
+    min-height: 400px !important;
+}
+
+.mermaid svg {
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 400px !important;
+}
+
+/* Ensure diagram text is readable */
+.mermaid .node text,
+.mermaid .edgeLabel text {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}

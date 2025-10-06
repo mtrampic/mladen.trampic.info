@@ -25,3 +25,4 @@ Thumbs.db
 
 # Credentials/keys/etc
 .env
+devcontainer.env
