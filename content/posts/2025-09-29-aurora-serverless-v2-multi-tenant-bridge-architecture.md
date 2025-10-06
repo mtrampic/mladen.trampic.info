@@ -47,8 +47,9 @@ Aurora Serverless V2 automatically scales database capacity up and down based on
 - **Incremental Scaling**: Unlike Serverless v1 which doubles capacity, v2 scales incrementally starting from 0.5 ACU increments. Larger current capacity enables larger scaling increments for faster scaling
 - **Pay-per-Use**: Charged only for consumed capacity per second
 - **Sub-second Scaling**: Rapid capacity adjustments with no downtime or connection drops
-- **Pause Capability**: Can scale to zero during idle periods (note: resuming from 0 ACUs incurs a cold-start delay of 5-15 seconds, making this feature best suited for development or non-critical workloads)
+- **Pause Capability**: Can scale to zero during idle periods (note: resuming from 0 ACUs incurs a cold-start delay of 5-15 seconds, making this feature best suited for development or non-critical workloads. Open connections, such as those from RDS Proxy, prevent auto-pause)
 - **Simplified Management**: No instance sizing decisions required
+- **Resource Mapping**: Each ACU provides approximately 2 GiB of memory with connection limits typically defaulting to 2000 (capped when minimum ACU is 0 or 0.5)
 
 **Best For:**
 - Variable or unpredictable workloads
@@ -191,7 +192,7 @@ The choice between these approaches depends on your team's operational preferenc
 
 #### Aurora Serverless V2
 **Strengths:**
-- **Same Security Features**: Full parity with Aurora Provisioned security capabilities
+- **Comprehensive Security Features**: Most Aurora Provisioned security capabilities with some exceptions (Database Activity Streams not currently supported)
 - **IAM Database Authentication**: Supports modern authentication patterns
 - **Transparent Scaling**: Scaling events don't affect security boundaries
 
@@ -242,7 +243,7 @@ Dynamic scaling significantly improves reliability for variable workloads, while
 **Strengths:**
 - **Dynamic Resource Allocation**: Automatically adjusts to workload demands
 - **Improved Resource Utilization**: Scales down during idle periods
-- **Better Tenant Isolation**: Can scale up to handle heavy tenant workloads
+- **Tenant Impact Mitigation**: Can scale up to handle heavy tenant workloads, though doesn't eliminate noisy neighbor risks entirely
 
 **Challenges:**
 - **Scaling Latency**: Brief delays during scaling events
