@@ -367,6 +367,9 @@ def get_tenant_connection(tenant_id):
 - Track connection counts per tenant database
 - Monitor autovacuum performance across databases
 
+#### Monitoring Multi-Tenant Databases
+Effective monitoring in the Bridge model requires tracking both cluster-level and tenant-specific metrics. Use Performance Insights to monitor database load per tenant by leveraging the `db.user.name` dimension, which allows you to identify resource-intensive tenants and detect noisy neighbor scenarios. For Aurora Serverless V2, monitor `ServerlessDatabaseCapacity` and `ACUUtilization` to understand scaling patterns and cost drivers. Combine these insights with `pg_stat_database` views to track per-database connection counts, query performance, and storage usage. This multi-layered approach enables accurate cost allocation, proactive capacity planning, and early detection of tenant-specific performance issues.
+
 #### Operational Guardrails
 - **Per-Tenant Safeguards**: Configure `statement_timeout` and `idle_in_transaction_session_timeout` to prevent runaway queries
 - **Application-Layer Controls**: Implement rate limiting and connection pooling per tenant
@@ -614,6 +617,8 @@ For deeper insights into multi-tenant SaaS architecture patterns and AWS best pr
 - **[Multi-tenant Application Best Practices - Amazon Cognito](https://docs.aws.amazon.com/cognito/latest/developerguide/multi-tenant-application-best-practices.html)** - Scaling considerations and quota management for multi-tenant applications using Amazon Cognito.
 
 - **[Managed Database Backup and Recovery in a Multi-tenant SaaS Application](https://aws.amazon.com/blogs/database/managed-database-backup-and-recovery-in-a-multi-tenant-saas-application/)** - Comprehensive guide to backup and recovery strategies across silo, bridge, and pool models with practical PostgreSQL examples.
+
+- **[Improve Cost Visibility of an Amazon RDS Multi-tenant Instance with Performance Insights and Amazon Athena](https://aws.amazon.com/blogs/database/improve-cost-visibility-of-an-amazon-rds-multi-tenant-instance-with-performance-insights-and-amazon-athena/)** - Detailed approach to cost allocation and monitoring for multi-tenant databases using Performance Insights metrics and AWS Cost and Usage Reports.
 
 ## Conclusion
 
