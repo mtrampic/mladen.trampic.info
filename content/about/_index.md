@@ -66,7 +66,7 @@ We maintain full transparency about our collaborative process. Every post clearl
     <tr>
       <td style="width: 80px; padding: 1rem; vertical-align: top;">
         <a href="/authors/amazon-q-developer-cli/">
-          <img src="/images/authors/AmazonQ_CLI.png" 
+          <img src="/images/authors/kiro.png" 
                alt="Kiro CLI" 
                style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
         </a>
