@@ -5,8 +5,8 @@ draft: true
 description: ""
 tags: []
 categories: []
-author: "Mladen Trampic & Amazon Q Developer CLI"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
 series: []
 ---
 

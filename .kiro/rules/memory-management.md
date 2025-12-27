@@ -3,7 +3,7 @@
 ## Entity Types
 - `blog_post`: Individual posts with metadata
 - `topic`: Technical subjects (AWS, DevOps, etc.)
-- `technology`: Specific tools (Hugo, Docker, Amazon Q)
+- `technology`: Specific tools (Hugo, Docker, Kiro)
 - `user_preference`: Writing style and content preferences
 - `series`: Related post collections
 - `concept`: Technical explanations and patterns
@@ -46,7 +46,7 @@ When creating or discussing blog content:
   "entityType": "blog_post",
   "observations": [
     "Published on 2025-09-07",
-    "Covers Amazon Q CLI configuration",
+    "Covers Kiro CLI configuration",
     "Technical tutorial format",
     "Includes JSON examples",
     "Well-received by readers"
@@ -63,7 +63,7 @@ When creating or discussing blog content:
     "Prefers technical accuracy over simplicity",
     "Likes practical examples with code",
     "Targets both beginners and experts",
-    "Uses co-authorship with Amazon Q",
+    "Uses co-authorship with Kiro",
     "Focuses on AWS and DevOps topics"
   ]
 }

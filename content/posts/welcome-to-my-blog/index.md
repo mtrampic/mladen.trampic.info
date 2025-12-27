@@ -6,8 +6,8 @@ description: "Welcome to my personal blog where I share insights about technolog
 slug: "welcome-to-my-blog"
 tags: ["welcome", "introduction", "blog"]
 categories: ["General"]
-author: "Mladen Trampic & Amazon Q Developer CLI"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
 showTableOfContents: true
 ---
 
@@ -52,4 +52,4 @@ Mladen
 
 ---
 
-*This blog features content co-authored with Amazon Q Developer, combining human insights with AI assistance for enhanced technical accuracy and comprehensive coverage.*
+*This blog features content co-authored with Kiro, combining human insights with AI assistance for enhanced technical accuracy and comprehensive coverage.*

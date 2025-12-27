@@ -1,12 +1,12 @@
 ---
-title: "Enhancing Amazon Q with MCP: Sequential Thinking and Memory Tools"
+title: "Enhancing Kiro with MCP: Sequential Thinking and Memory Tools"
 date: 2025-09-14T10:36:00Z
 draft: false
-description: "Discover how Model Context Protocol (MCP) servers extend Amazon Q CLI with sequential thinking and memory capabilities for enhanced AI assistance."
-tags: ["Amazon Q", "MCP", "Model Context Protocol", "Sequential Thinking", "Memory", "AI Tools", "Development"]
+description: "Discover how Model Context Protocol (MCP) servers extend Kiro CLI with sequential thinking and memory capabilities for enhanced AI assistance."
+tags: ["Kiro", "MCP", "Model Context Protocol", "Sequential Thinking", "Memory", "AI Tools", "Development"]
 categories: ["Development", "AI"]
-author: "Mladen Trampic & Amazon Q Developer CLI"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
 series: []
 ---
 
@@ -16,7 +16,7 @@ series: []
 
 Just like the classic "Exact Instructions Challenge" demonstrates the importance of precise, unambiguous directions, MCP servers require detailed agent configuration and explicit workflow guidance to function predictably. Without clear specifications, AI agents—like the students in the video—will interpret instructions in unexpected ways.
 
-Amazon Q CLI's Model Context Protocol (MCP) servers transform generic AI assistance into deterministic, workflow-driven tools. But this power comes with responsibility: you must define exact agent behaviors, mandatory step sequences, and strict prohibitions to ensure consistent results.
+Kiro CLI's Model Context Protocol (MCP) servers transform generic AI assistance into deterministic, workflow-driven tools. But this power comes with responsibility: you must define exact agent behaviors, mandatory step sequences, and strict prohibitions to ensure consistent results.
 
 Two particularly valuable MCP servers are sequential thinking and memory tools, which bring structured reasoning and persistent context to your AI workflows—but only when properly configured with explicit instructions and workflow requirements.
 
@@ -28,7 +28,7 @@ The Model Context Protocol is an open standard that enables AI applications to c
 
 ```mermaid
 graph TB
-    subgraph "Amazon Q CLI Host"
+    subgraph "Kiro CLI Host"
         Client[MCP Client]
     end
     
@@ -61,7 +61,7 @@ graph TB
 
 **MCP Servers** provide specialized capabilities like tools, resources, or prompts to AI applications. They run as separate processes and communicate via JSON-RPC.
 
-**MCP Clients** (like Amazon Q CLI) connect to these servers and make their capabilities available to the AI model and user.
+**MCP Clients** (like Kiro CLI) connect to these servers and make their capabilities available to the AI model and user.
 
 **Protocol Features** include:
 - **Tools**: Executable functions the AI can invoke
@@ -87,7 +87,7 @@ When you encounter a complex problem, the sequential thinking tool:
 
 ### MCP Server Configuration
 
-Add MCP servers to your Amazon Q CLI configuration:
+Add MCP servers to your Kiro CLI configuration:
 
 ```json
 {
@@ -376,10 +376,10 @@ In our blog co-authoring workflow, memory stores:
 When planning this MCP blog post, memory provided:
 
 ```
-Previous Context: Amazon Q CLI agents post exists
+Previous Context: Kiro CLI agents post exists
 User Preference: Technical accuracy with practical examples
 Content Gap: No coverage of MCP servers specifically
-Relationship: This post complements existing Amazon Q content
+Relationship: This post complements existing Kiro content
 ```
 
 This context ensures new content builds on existing work rather than duplicating it.
@@ -461,14 +461,14 @@ The MCP ecosystem continues expanding with new servers for:
 
 ## Conclusion
 
-Sequential thinking and memory MCP servers transform Amazon Q CLI from a capable AI assistant into a sophisticated reasoning and learning system. Sequential thinking brings methodical analysis to complex problems, while memory provides the continuity needed for long-term collaboration and learning.
+Sequential thinking and memory MCP servers transform Kiro CLI from a capable AI assistant into a sophisticated reasoning and learning system. Sequential thinking brings methodical analysis to complex problems, while memory provides the continuity needed for long-term collaboration and learning.
 
 Together, they create an AI partnership that gets better over time, remembers your preferences and patterns, and approaches problems with the systematic rigor of an experienced colleague. Whether you're debugging complex systems, planning technical projects, or creating comprehensive content, these tools provide the structure and persistence that make AI assistance truly valuable.
 
 The Model Context Protocol's extensible architecture means this is just the beginning. As more specialized MCP servers emerge, the possibilities for enhanced AI assistance will continue expanding, making our development workflows more efficient and our problem-solving more effective.
 
-**Ready to enhance your Amazon Q CLI setup?** Start by adding sequential thinking and memory servers to your configuration, then experiment with how structured reasoning and persistent context can improve your daily workflows.
+**Ready to enhance your Kiro CLI setup?** Start by adding sequential thinking and memory servers to your configuration, then experiment with how structured reasoning and persistent context can improve your daily workflows.
 
 ---
 
-*This post was co-authored by Mladen Trampic and Amazon Q Developer CLI, demonstrating the collaborative approach to technical content creation enhanced by MCP tools.*
+*This post was co-authored by Mladen Trampic and Kiro, demonstrating the collaborative approach to technical content creation.*

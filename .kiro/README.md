@@ -1,6 +1,6 @@
 # Enhanced Blog Co-Author Agent System
 
-This directory contains a sophisticated Amazon Q CLI agent system designed for collaborative blog content creation, based on patterns reverse-engineered from advanced agent configurations.
+This directory contains a sophisticated Kiro CLI agent system designed for collaborative blog content creation, based on patterns reverse-engineered from advanced agent configurations.
 
 ## System Overview
 
@@ -9,7 +9,7 @@ The blog co-author agent system combines human expertise with AI-enhanced resear
 ## Key Components
 
 ### 1. Agent Configuration (`agents/blog-assistant.json`)
-- **Schema-validated JSON configuration** following Amazon Q CLI v1 schema
+- **Schema-validated JSON configuration** following Kiro CLI v1 schema
 - **MCP server integrations** for research and documentation access
 - **Tool restrictions and permissions** for secure content creation
 - **Resource access patterns** for rules and project intelligence
@@ -173,4 +173,4 @@ Run manual validation:
 - Check technical accuracy of existing content
 - Update deprecated information
 
-This enhanced blog agent system provides a sophisticated, secure, and efficient platform for collaborative technical content creation, leveraging the best practices observed in advanced Amazon Q CLI agent configurations.
+This enhanced blog agent system provides a sophisticated, secure, and efficient platform for collaborative technical content creation, leveraging the best practices observed in advanced Kiro CLI agent configurations.

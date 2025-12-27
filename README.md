@@ -1,14 +1,14 @@
 # Mladen Trampic's Technical Blog
 
-A Hugo-based technical blog featuring co-authored content created through collaboration between human expertise and Amazon Q Developer AI assistance.
+A Hugo-based technical blog featuring co-authored content created through collaboration between human expertise and Kiro AI assistance.
 
-## Co-Authoring Workflow with Amazon Q CLI
+## Co-Authoring Workflow with Kiro CLI
 
-This blog demonstrates an innovative approach to technical content creation using Amazon Q CLI as a co-authoring partner. All blog posts are collaboratively written, combining human perspective with AI-enhanced research, structure, and technical accuracy.
+This blog demonstrates an innovative approach to technical content creation using Kiro CLI as a co-authoring partner. All blog posts are collaboratively written, combining human perspective with AI-enhanced research, structure, and technical accuracy.
 
 ### Key Features
 
-- **AI-Enhanced Writing**: Amazon Q CLI assists with research, content structure, and technical validation
+- **AI-Enhanced Writing**: Kiro CLI assists with research, content structure, and technical validation
 - **Consistent Quality**: Automated content validation and Hugo build checks via git hooks
 - **DevContainer Environment**: Reproducible development setup with all tools pre-configured
 - **Rule-Based Guidelines**: Structured content principles maintained in `.amazonq/rules/`
@@ -40,8 +40,8 @@ This blog demonstrates an innovative approach to technical content creation usin
    - Or use Command Palette: `Dev Containers: Reopen in Container`
 
 4. **Wait for container setup**:
-   - The devcontainer will automatically install Hugo, AWS CLI, and Amazon Q CLI
-   - Amazon Q CLI credentials are mounted from your macOS `~/Library/Application Support/amazon-q`
+   - The devcontainer will automatically install Hugo, AWS CLI, and Kiro CLI
+   - Kiro CLI credentials are mounted from your macOS `~/Library/Application Support/amazon-q`
 
 ## DevContainer Configuration
 
@@ -54,8 +54,8 @@ The `.devcontainer/devcontainer.json` provides a complete development environmen
 - **AWS CLI** for cloud integrations
 - **GitHub CLI** for repository management
 
-### Amazon Q CLI Integration
-- Automatically downloads and installs Amazon Q CLI based on system architecture (ARM64/x86_64)
+### Kiro CLI Integration
+- Automatically downloads and installs Kiro CLI based on system architecture (ARM64/x86_64)
 - Mounts macOS credentials from `~/Library/Application Support/amazon-q`
 - Creates `q` alias pointing to `qchat` for easy access
 - Port forwarding for Hugo development server (1313)
@@ -70,7 +70,7 @@ The `.devcontainer/devcontainer.json` provides a complete development environmen
 
 ## Content Creation Workflow
 
-### Using Amazon Q CLI for Co-Authoring
+### Using Kiro CLI for Co-Authoring
 
 1. **Start a chat session**:
    ```bash
@@ -88,7 +88,7 @@ The `.devcontainer/devcontainer.json` provides a complete development environmen
    ```
 
 4. **Research and validate**:
-   - Amazon Q CLI accesses documentation and validates technical accuracy
+   - Kiro CLI accesses documentation and validates technical accuracy
    - Follows content guidelines defined in `.amazonq/rules/`
 
 ### Local Development
@@ -134,7 +134,7 @@ git push origin main
 
 ```
 ├── .amazonq/
-│   ├── cli-agents/          # Amazon Q CLI agent configurations
+│   ├── cli-agents/          # Kiro CLI agent configurations
 │   └── rules/               # Content creation guidelines
 ├── .devcontainer/           # VS Code devcontainer configuration
 ├── content/
@@ -148,7 +148,7 @@ git push origin main
 
 - **Hugo** - Static site generator
 - **Congo Theme** - Modern, responsive Hugo theme
-- **Amazon Q CLI** - AI-powered development assistant
+- **Kiro CLI** - AI-powered development assistant
 - **GitHub Actions** - Automated deployment
 - **VS Code Dev Containers** - Consistent development environment
 
@@ -158,4 +158,4 @@ This is a personal blog, but the co-authoring workflow and devcontainer setup ca
 
 ---
 
-*All content is co-authored by Mladen Trampic and Amazon Q Developer, demonstrating the collaborative potential of human-AI content creation.*
+*All content is co-authored by Mladen Trampic and Kiro, demonstrating the collaborative potential of human-AI content creation.*

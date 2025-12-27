@@ -112,7 +112,7 @@ Before publishing any blog post, ensure:
 - [ ] Content follows consistent formatting standards
 - [ ] Examples are practical and solve real problems
 - [ ] **No placeholder or dummy data** - all examples use realistic scenarios
-- [ ] **Proper co-authorship attribution** - includes "Mladen Trampic & Amazon Q Developer"
+- [ ] **Proper co-authorship attribution** - includes "Mladen Trampic & Kiro Developer"
 - [ ] **Meaningful post titles** - descriptive titles that indicate content and value
 - [ ] **SEO optimization** - proper meta descriptions, tags, and structure
 - [ ] **Accessibility compliance** - alt text, proper headings, readable formatting
@@ -127,4 +127,4 @@ Remember: Our goal is to make complex technical topics accessible to developers 
 
 ---
 
-*These principles guide the collaborative content creation between Mladen Trampic and Amazon Q Developer.*
+*These principles guide the collaborative content creation between Mladen Trampic and Kiro Developer.*

@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"name": "Ubuntu",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"features": {
 		"ghcr.io/devcontainers/features/aws-cli:1": {},
@@ -10,27 +9,15 @@
 		"ghcr.io/devcontainers/features/go:1": {},
 		"ghcr.io/devcontainers/features/python:1": {},
 		"ghcr.io/devcontainers/features/node:1": {},
-		// Docker-in-Docker support
 		"ghcr.io/devcontainers/features/docker-in-docker:2.12.3": {}
 	},
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/Library/Application Support/amazon-q,target=/home/vscode/.local/share/amazon-q,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/Library/Application Support/kiro-cli,target=/home/vscode/.local/share/kiro-cli,type=bind,consistency=cached",
 		"source=memory-volume,target=/home/vscode/.memory,type=volume"
 	],
-	"postCreateCommand": "bash -lc 'HUGO_VERSION=0.145.0 && ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then HUGO_ARCH=arm64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-${ARCH}-linux.zip; else HUGO_ARCH=amd64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/q-x86_64-linux.zip; fi && wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${HUGO_ARCH}.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o q.zip && unzip q.zip && sudo mv q/bin/q* /usr/local/bin/ && rm -rf q.zip q && echo \"alias q=\\\"/usr/local/bin/qchat\\\"\" | tee -a ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile && sudo mkdir -p /home/vscode/.local/lib && sudo chown -R vscode:vscode /home/vscode/.local && pip install uv && uv tool install ruff && hugo mod get github.com/jpanther/congo/v2@v2.11.0'",
-	"postStartCommand": "q settings chat.defaultAgent blog-assistant || true",
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bash -lc 'HUGO_VERSION=0.145.0 && ARCH=$(uname -m) && if [[ $ARCH = aarch64 || $ARCH = arm64 ]]; then HUGO_ARCH=arm64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/kirocli-${ARCH}-linux.zip; else HUGO_ARCH=amd64; DOWNLOAD_URL=https://desktop-release.q.us-east-1.amazonaws.com/latest/kirocli-x86_64-linux.zip; fi && wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${HUGO_ARCH}.deb && sudo dpkg -i /tmp/hugo.deb && rm /tmp/hugo.deb && sudo mkdir -p /home/vscode/.local/bin && sudo chown -R vscode:vscode /home/vscode/.local && curl --proto \"=https\" --tlsv1.2 -sSf \"$DOWNLOAD_URL\" -o kirocli.zip && unzip -o kirocli.zip && KIRO_CLI_SKIP_SETUP=1 ./kirocli/install.sh && echo \"export PATH=\\\"\\$HOME/.local/bin:\\$PATH\\\"\" >> ~/.bashrc && rm -rf kirocli.zip kirocli && pip install uv && uv tool install ruff && hugo mod get github.com/jpanther/congo/v2@v2.11.0'",
 	"forwardPorts": [1313],
-	// "postCreateCommand": "uname -a",
-	// Configure tool-specific properties.
-	// "customizations": {},
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root",
-	// Allow the container to run dind in privileged mode
 	"runArgs": [
 		"--privileged",
 		"--env-file", ".devcontainer/devcontainer.env"

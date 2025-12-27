@@ -5,13 +5,13 @@ draft: false
 description: "Supporting assets for MCP sequential thinking and memory demo"
 tags: ["assets", "demo"]
 categories: ["Development"]
-author: "Mladen Trampic & Amazon Q Developer CLI"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
 ---
 
 ## MCP Sequential Thinking Demo Assets
 
-This directory contains the Python scripts and setup instructions to replicate the performance optimization example from the blog post "Enhancing Amazon Q with MCP: Sequential Thinking and Memory Tools".
+This directory contains the Python scripts and setup instructions to replicate the performance optimization example from the blog post "Enhancing Kiro with MCP: Sequential Thinking and Memory Tools".
 
 ## Files
 

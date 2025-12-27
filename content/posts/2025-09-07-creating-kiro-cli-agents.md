@@ -1,26 +1,26 @@
 ---
-title: "Creating Amazon Q CLI Agents: Configuration and Validation"
+title: "Creating Kiro CLI Agents: Configuration and Validation"
 date: 2025-09-07T09:57:00Z
 draft: false
-tags: ["AWS", "Amazon Q", "CLI", "AI", "Development Tools"]
+tags: ["AWS", "Kiro", "CLI", "AI", "Development Tools"]
 categories: ["Development"]
-author: "Mladen Trampic & Amazon Q Developer CLI"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
-description: "Learn how to create and configure custom Amazon Q CLI agents with proper JSON structure and validation commands."
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
+description: "Learn how to create and configure custom Kiro CLI agents with proper JSON structure and validation commands."
 series: []
 ---
 
 ## Introduction
 
-Amazon Q CLI's agent system allows you to create specialized AI assistants tailored to specific workflows and domains. Instead of using a generic assistant, you can configure agents with custom prompts, tools, and behaviors that understand your project context and requirements. This guide walks through the complete process of creating, configuring, and validating custom Amazon Q CLI agents, from basic JSON structure to advanced configuration options.
+Kiro CLI's agent system allows you to create specialized AI assistants tailored to specific workflows and domains. Instead of using a generic assistant, you can configure agents with custom prompts, tools, and behaviors that understand your project context and requirements. This guide walks through the complete process of creating, configuring, and validating custom Kiro CLI agents, from basic JSON structure to advanced configuration options.
 
-For the official documentation on creating custom agents, see the [Amazon Q Developer User Guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-custom-agents.html).
+For the official documentation on creating custom agents, see the [Kiro User Guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-custom-agents.html).
 
-Whether you're building a blog writing assistant, a code review agent, or a DevOps helper, understanding agent configuration will help you maximize Amazon Q's effectiveness in your development workflow.
+Whether you're building a blog writing assistant, a code review agent, or a DevOps helper, understanding agent configuration will help you maximize Kiro's effectiveness in your development workflow.
 
 ## Agent Configuration Structure
 
-Amazon Q CLI agents use JSON configuration files with a specific schema. Here are the key fields:
+Kiro CLI agents use JSON configuration files with a specific schema. Here are the key fields:
 
 ```json
 {
@@ -49,7 +49,7 @@ The schema also supports these optional fields:
 - `toolsSettings`: Tool-specific configuration
 - `useLegacyMcpJson`: Legacy MCP JSON support flag
 
-For the complete and up-to-date list of all available fields, refer to the [official agent schema](https://github.com/aws/amazon-q-developer-cli/blob/main/schemas/agent-v1.json) in the Amazon Q CLI repository.
+For the complete and up-to-date list of all available fields, refer to the [official agent schema](https://github.com/aws/kiro/blob/main/schemas/agent-v1.json) in the Kiro CLI repository.
 
 ## Creating an Agent
 
@@ -94,7 +94,7 @@ The `prompt` field is the most critical part of your agent configuration—it de
 
 ```json
 {
-  "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Amazon Q Developer.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
+  "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Kiro.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
 }
 ```
 
@@ -108,7 +108,7 @@ The `prompt` field is the most critical part of your agent configuration—it de
 
 ### Integrating Rules with Agent Configuration
 
-Amazon Q CLI agents can reference external rule files in two ways:
+Kiro CLI agents can reference external rule files in two ways:
 
 **Method 1: Reference in System Prompt**
 ```json
@@ -142,11 +142,11 @@ This approach offers several advantages:
 
 ## Agent Hooks: Adding Contextual Intelligence
 
-Hooks are one of Amazon Q CLI's most powerful features, allowing agents to automatically gather project context by running shell commands at specific trigger points. The output of these commands is injected into the agent's context, making it aware of your project's current state.
+Hooks are one of Kiro CLI's most powerful features, allowing agents to automatically gather project context by running shell commands at specific trigger points. The output of these commands is injected into the agent's context, making it aware of your project's current state.
 
 ### Hook Triggers
 
-Amazon Q CLI supports two hook triggers:
+Kiro CLI supports two hook triggers:
 
 - **`agentSpawn`**: Runs when the agent starts, providing initial context
 - **`userPromptSubmit`**: Runs before each user message, ensuring fresh context
@@ -217,7 +217,7 @@ changes in content/posts/ - would you like me to help organize those first?"
 
 ## Validation Commands
 
-Amazon Q CLI provides built-in validation for agent configurations:
+Kiro CLI provides built-in validation for agent configurations:
 
 ```bash
 # Validate agent configuration
@@ -261,15 +261,15 @@ The CLI will use your specified agent or allow you to select from available agen
 
 ## Additional Resources
 
-For deeper insights into Amazon Q Developer agents and advanced configurations, check out these AWS blog posts:
+For deeper insights into Kiro agents and advanced configurations, check out these AWS blog posts:
 
-- **[Mastering Amazon Q Developer with Rules](https://aws.amazon.com/blogs/devops/mastering-amazon-q-developer-with-rules/)** - Learn how to create sophisticated rule-based configurations that enhance Amazon Q's understanding of your codebase and development practices.
+- **[Mastering Kiro with Rules](https://aws.amazon.com/blogs/devops/mastering-amazon-q-developer-with-rules/)** - Learn how to create sophisticated rule-based configurations that enhance Kiro's understanding of your codebase and development practices.
 
-- **[Overcome Development Disarray with Amazon Q Developer CLI Custom Agents](https://aws.amazon.com/blogs/devops/overcome-development-disarray-with-amazon-q-developer-cli-custom-agents/)** - Explore real-world examples of custom agents that streamline development workflows and reduce context switching.
+- **[Overcome Development Disarray with Kiro CLI Custom Agents](https://aws.amazon.com/blogs/devops/overcome-development-disarray-with-kiro-custom-agents/)** - Explore real-world examples of custom agents that streamline development workflows and reduce context switching.
 
 ## Conclusion
 
-Custom Amazon Q CLI agents transform generic AI assistance into specialized, context-aware helpers tailored to your specific workflows. By understanding the JSON configuration structure and validation process, you can create agents that understand your project requirements and provide more relevant assistance. Start with simple configurations and gradually add advanced features like custom tools and MCP servers as your needs evolve.
+Custom Kiro CLI agents transform generic AI assistance into specialized, context-aware helpers tailored to your specific workflows. By understanding the JSON configuration structure and validation process, you can create agents that understand your project requirements and provide more relevant assistance. Start with simple configurations and gradually add advanced features like custom tools and MCP servers as your needs evolve.
 
 **Want to see this in action?** Check out the complete project structure and agent configurations used for this blog at: https://github.com/mtrampic/mladen.trampic.info
 
@@ -277,4 +277,4 @@ Next steps: experiment with different prompt strategies, explore MCP server inte
 
 ---
 
-*This post was co-authored by Mladen Trampic and Amazon Q Developer, demonstrating the collaborative approach to technical content creation.*
+*This post was co-authored by Mladen Trampic and Kiro, demonstrating the collaborative approach to technical content creation.*

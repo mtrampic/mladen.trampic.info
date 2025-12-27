@@ -1,10 +1,10 @@
 # Blog Co-Authorship Rule
 
-When creating or editing blog content for this Hugo-based personal blog, acknowledge that content is co-authored by Amazon Q Developer CLI. 
+When creating or editing blog content for this Hugo-based personal blog, acknowledge that content is co-authored by Kiro. 
 
-All blog posts and content should reflect collaborative authorship between Mladen Trampic and Amazon Q Developer CLI, ensuring transparency about AI assistance in the writing process.
+All blog posts and content should reflect collaborative authorship between Mladen Trampic and Kiro, ensuring transparency about AI assistance in the writing process.
 
-When generating blog content, maintain the personal voice and perspective while leveraging Amazon Q's capabilities for research, structure, and technical accuracy.
+When generating blog content, maintain the personal voice and perspective while leveraging Kiro's capabilities for research, structure, and technical accuracy.
 
 ## Standard Blog Post Requirements
 
@@ -18,7 +18,7 @@ draft: false
 description: "SEO-optimized description"
 tags: ["tag1", "tag2", "tag3"]
 categories: ["Category"]
-author: "Mladen Trampic & Amazon Q Developer CLI"
+author: "Mladen Trampic & Kiro"
 authors: ["mladen-trampic", "amazon-q-developer-cli"]
 ---
 ```
@@ -30,7 +30,7 @@ Every blog post MUST include at the bottom:
 ```markdown
 ---
 
-*This post was co-authored by Mladen Trampic and Amazon Q Developer CLI, demonstrating the collaborative approach to technical content creation.*
+*This post was co-authored by Mladen Trampic and Kiro, demonstrating the collaborative approach to technical content creation.*
 ```
 
 2. **Authors table** (automatically added by layout):

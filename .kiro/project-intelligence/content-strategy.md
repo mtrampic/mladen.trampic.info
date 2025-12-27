@@ -114,7 +114,7 @@ Create high-quality technical content that bridges the gap between complex cloud
 - Real-world context and examples
 - Final review and approval
 
-### AI Contribution (Amazon Q Developer)
+### AI Contribution (Kiro Developer)
 - Research and fact-checking
 - Content structure and organization
 - Technical accuracy verification

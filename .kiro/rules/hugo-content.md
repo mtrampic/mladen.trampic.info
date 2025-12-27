@@ -2,7 +2,7 @@
 
 ## Core Principles
 
-All blog content is co-authored by Mladen Trampic and Amazon Q Developer. This collaborative approach ensures both personal perspective and AI-enhanced research, structure, and technical accuracy.
+All blog content is co-authored by Mladen Trampic and Kiro Developer. This collaborative approach ensures both personal perspective and AI-enhanced research, structure, and technical accuracy.
 
 ## Frontmatter Requirements
 
@@ -16,7 +16,7 @@ draft: false
 description: "Compelling meta description (150-160 characters)"
 tags: ["tag1", "tag2", "tag3"]
 categories: ["Category"]
-author: "Mladen Trampic & Amazon Q Developer"
+author: "Mladen Trampic & Kiro Developer"
 ---
 ```
 
@@ -28,7 +28,7 @@ author: "Mladen Trampic & Amazon Q Developer"
 - **description**: Compelling meta description for SEO (150-160 characters)
 - **tags**: Relevant, specific tags (3-7 tags recommended)
 - **categories**: Broad categorization (1-2 categories)
-- **author**: Always "Mladen Trampic & Amazon Q Developer"
+- **author**: Always "Mladen Trampic & Kiro Developer"
 
 ## Content Structure
 

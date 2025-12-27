@@ -5,12 +5,10 @@ draft: false
 description: "Comprehensive comparison of Aurora Provisioned and Serverless V2 for multi-tenant SaaS applications using the Bridge database model, with Well-Architected Framework analysis and implementation guidance."
 tags: ["AWS", "Aurora", "Multi-tenant", "SaaS", "Database", "Serverless", "PostgreSQL", "Architecture"]
 categories: ["Database", "Architecture"]
-author: "Mladen Trampic & Amazon Q Developer"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+author: "Mladen Trampic & Kiro"
+authors: ["mladen-trampic", "kiro"]
 series: []
 ---
-
-# Aurora Provisioned vs Serverless V2 for Multi-Tenant SaaS: A Complete Guide to Bridge Database Architecture
 
 ## Introduction
 
@@ -650,4 +648,4 @@ The Bridge model with Aurora Serverless V2 represents a mature, cost-effective a
 
 ---
 
-*This post was co-authored by Mladen Trampic and Amazon Q Developer, demonstrating the collaborative approach to technical content creation.*
+*This post was co-authored by Mladen Trampic and Kiro, demonstrating the collaborative approach to technical content creation.*

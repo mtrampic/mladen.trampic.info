@@ -15,7 +15,7 @@ This is a Hugo-based static site blog focused on technical content, particularly
 
 ### Development Environment
 - **VS Code DevContainer**: Consistent development environment
-- **Amazon Q CLI**: AI-powered development assistance
+- **Kiro CLI**: AI-powered development assistance
 - **Git**: Version control and content management
 
 ## Site Structure
