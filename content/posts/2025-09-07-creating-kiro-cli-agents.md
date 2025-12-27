@@ -14,7 +14,7 @@ series: []
 
 Kiro CLI's agent system allows you to create specialized AI assistants tailored to specific workflows and domains. Instead of using a generic assistant, you can configure agents with custom prompts, tools, and behaviors that understand your project context and requirements. This guide walks through the complete process of creating, configuring, and validating custom Kiro CLI agents, from basic JSON structure to advanced configuration options.
 
-For the official documentation on creating custom agents, see the [Kiro User Guide](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-custom-agents.html).
+For the official documentation on creating custom agents, see the [Kiro CLI Documentation](https://kiro.dev/docs/cli/custom-agents/creating/).
 
 Whether you're building a blog writing assistant, a code review agent, or a DevOps helper, understanding agent configuration will help you maximize Kiro's effectiveness in your development workflow.
 
@@ -24,9 +24,13 @@ Kiro CLI agents use JSON configuration files with a specific schema. Here are th
 
 ```json
 {
-  "name": "your-agent-name",
-  "description": "Brief description of what your agent does",
-  "prompt": "System prompt that defines the agent's behavior and context"
+  "name": "my-agent",
+  "description": "A custom agent for my workflow",
+  "tools": ["read","write"],
+  "allowedTools": ["read"],
+  "resources": ["file://README.md", "file://.kiro/steering/**/*.md"],
+  "prompt": "You are a helpful coding assistant",
+  "model": "claude-sonnet-4"
 }
 ```
 
@@ -48,8 +52,9 @@ The schema also supports these optional fields:
 - `hooks`: Event hooks for agent lifecycle
 - `toolsSettings`: Tool-specific configuration
 - `useLegacyMcpJson`: Legacy MCP JSON support flag
+- `model`: Specify the AI model to use (e.g., "claude-sonnet-4")
 
-For the complete and up-to-date list of all available fields, refer to the [official agent schema](https://github.com/aws/kiro/blob/main/schemas/agent-v1.json) in the Kiro CLI repository.
+For the complete and up-to-date list of all available fields, refer to the [official Kiro CLI documentation](https://kiro.dev/docs/cli/custom-agents/creating/).
 
 ## Creating an Agent
 
