@@ -124,6 +124,11 @@
     "@github/list_pull_requests",
     "@playwright"
   ],
+  "resources": [
+    "file://.kiro/steering/*.md",
+    "file://README.md",
+    "file://config.yaml"
+  ],
   "hooks": {
     "agentSpawn": [
       {
