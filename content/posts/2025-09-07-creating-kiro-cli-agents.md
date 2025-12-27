@@ -42,7 +42,15 @@ Kiro CLI agents use JSON configuration files with a specific schema. Here are th
 
 ### Optional Fields
 
-The schema also supports these optional fields:
+The schema supports many additional optional fields for advanced configuration. For the complete and up-to-date list of all available fields and their descriptions, use the schema command within a Kiro CLI chat session:
+
+```bash
+kiro-cli chat --agent your-agent
+# Then in the interactive session:
+/agent schema
+```
+
+This command provides the authoritative JSON schema reference for all supported configuration options, including:
 - `$schema`: JSON schema reference
 - `mcpServers`: Model Context Protocol server configurations
 - `tools`: Specific tools the agent can use
@@ -54,16 +62,16 @@ The schema also supports these optional fields:
 - `useLegacyMcpJson`: Legacy MCP JSON support flag
 - `model`: Specify the AI model to use (e.g., "claude-sonnet-4")
 
-For the complete and up-to-date list of all available fields, refer to the [official Kiro CLI documentation](https://kiro.dev/docs/cli/custom-agents/creating/).
+For detailed documentation and examples, refer to the [official Kiro CLI documentation](https://kiro.dev/docs/cli/custom-agents/creating/).
 
 ## Creating an Agent
 
 1. **Create the agent directory structure**:
 ```bash
-mkdir -p .amazonq/cli-agents
+mkdir -p .kiro/agents
 ```
 
-2. **Create your agent configuration** in `.amazonq/cli-agents/blog-assistant.json`:
+2. **Create your agent configuration** in `.kiro/agents/blog-assistant.json`:
 ```json
 {
   "name": "blog-assistant",
@@ -118,7 +126,7 @@ Kiro CLI agents can reference external rule files in two ways:
 **Method 1: Reference in System Prompt**
 ```json
 {
-  "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.amazonq/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
+  "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.kiro/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
 }
 ```
 
@@ -128,10 +136,10 @@ Kiro CLI agents can reference external rule files in two ways:
   "name": "blog-assistant",
   "prompt": "You are a specialized blog assistant for technical content creation.",
   "resources": [
-    ".amazonq/rules/blog-principles.md",
-    ".amazonq/rules/hugo-content.md", 
-    ".amazonq/rules/technical-writing.md",
-    ".amazonq/rules/blog-authorship.md"
+    ".kiro/rules/blog-principles.md",
+    ".kiro/rules/hugo-content.md", 
+    ".kiro/rules/technical-writing.md",
+    ".kiro/rules/blog-authorship.md"
   ]
 }
 ```
@@ -225,17 +233,22 @@ changes in content/posts/ - would you like me to help organize those first?"
 Kiro CLI provides built-in validation for agent configurations:
 
 ```bash
+# Get complete schema information
+kiro-cli chat --agent your-agent
+# Then in the interactive session:
+/agent schema
+
 # Validate agent configuration
-q agent validate --path .amazonq/cli-agents/your-agent.json
+kiro-cli agent validate --path .kiro/agents/your-agent.json
 
 # List available agents (run from project directory)
-q agent list
+kiro-cli agent list
 
-# Check Q CLI version
-q --version
+# Check Kiro CLI version
+kiro-cli --version
 
 # Get help for agent commands
-q agent --help
+kiro-cli agent --help
 ```
 
 ## Common Issues
@@ -244,7 +257,7 @@ q agent --help
 
 **Field Names**: Use `prompt` instead of `instructions` for the agent's system prompt.
 
-**Agent Discovery**: While you can specify any path in config.json, Q CLI has a discovery preference for the `.amazonq/cli-agents/` directory. For best compatibility, place agent files in this standard location rather than custom directories.
+**Agent Discovery**: While you can specify any path in config.json, Kiro CLI has a discovery preference for the `.kiro/agents/` directory. For best compatibility, place agent files in this standard location rather than custom directories.
 
 **Tool Permissions**: Include tools in both `tools` and `allowedTools` arrays. Use `toolsSettings` to restrict file operations to safe paths.
 
@@ -253,13 +266,13 @@ q agent --help
 Once configured and validated, test your agent by starting a chat session:
 
 ```bash
-q chat --agent blog-assistant
+kiro-cli chat --agent blog-assistant
 ```
 
 Or if you've set it as your default agent:
 
 ```bash
-q chat
+kiro-cli chat
 ```
 
 The CLI will use your specified agent or allow you to select from available agents.
