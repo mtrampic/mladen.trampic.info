@@ -32,9 +32,9 @@ validate_frontmatter() {
     done
     
     # Check co-authorship
-    if ! echo "$frontmatter" | grep -q "author.*Mladen Trampic.*Amazon Q Developer"; then
+    if ! echo "$frontmatter" | grep -q "author.*Mladen Trampic.*Kiro"; then
         echo "❌ Missing proper co-authorship attribution in $file"
-        echo "   Expected: 'Mladen Trampic & Amazon Q Developer'"
+        echo "   Expected: 'Mladen Trampic & Kiro'"
         return 1
     fi
     
