@@ -399,7 +399,7 @@ Outputs:
       2. Configure my on-premises router with BGP settings
       3. Test connectivity between networks (192.168.0.0/16 <-> 10.0.0.0/16)
       4. Both NAT Gateways provide redundancy for private subnet internet access
-```
+```bash
 
 ## Step 2: Download VPN Configuration
 
@@ -512,7 +512,7 @@ route-map OUT-PRIMARY permit 10
 route-map OUT-BACKUP permit 10
  set as-path prepend 65000 65000
 !
-```
+```bash
 
 2. **Navigate to Dynamic Routing** in the UniFi Console:
 
@@ -545,7 +545,7 @@ First, verify that the IPSec tunnels are established:
 # SSH to UniFi Gateway and test connectivity to AWS tunnel endpoints
 ping 169.254.224.217
 ping 169.254.252.33
-```
+```bash
 
 ### BGP Status and Debugging
 
@@ -575,7 +575,7 @@ show ip bgp
 
 # Check if specific route is in BGP table
 show ip bgp 192.168.1.0/24
-```
+```bash
 
 ### Route Advertisement Issues
 
@@ -596,7 +596,7 @@ show ip route
 
 # Verify route-maps are applied correctly
 show route-map ALLOW-ALL
-```
+```bash
 
 ### Common Configuration Issues
 
@@ -632,7 +632,7 @@ journalctl -u frr -f
 
 # Restart FRR if needed
 systemctl restart frr
-```
+```bash
 
 ## Conclusion
 

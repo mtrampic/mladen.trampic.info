@@ -55,7 +55,7 @@ graph TB
     Analysis --> Enhanced[Enhanced AI Assistance]
     Context --> Enhanced
     Tools --> Enhanced
-```
+```bash
 
 ### Key MCP Concepts
 
@@ -105,7 +105,7 @@ Add MCP servers to your Kiro CLI configuration:
     }
   }
 }
-```
+```bash
 
 ### Memory Persistence Across Environments
 
@@ -126,7 +126,7 @@ Example memory file paths:
 
 # Environment-specific memory
 /data/memory/staging-assistant.json
-```
+```bash
 
 ### Agent Integration
 
@@ -163,7 +163,7 @@ Reference MCP capabilities in your agent configurations. Here's the complete `mc
     "execute_bash"
   ]
 }
-```
+```bash
 
 ### Real-World Integration Example
 
@@ -185,11 +185,11 @@ docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=testpass -e MYSQL_DATABASE=t
 
 # User creates test data and runs slow script
 > "My slow_script.py is processing 10,000 records in 1.32 seconds. Help me optimize it."
-```
+```bash
 
 **Agent Uses Sequential Thinking**:
 
-```
+```bash
 🛠️  Using tool: sequentialthinking (trusted) from mcp server sequential-thinking
  ⋮ 
  ● Running sequentialthinking with the param:
@@ -235,7 +235,7 @@ docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=testpass -e MYSQL_DATABASE=t
  ⋮    "totalThoughts": 5,
  ⋮    "nextThoughtNeeded": false
  ⋮  }
-```
+```bash
 
 **Agent Runs Profiling**:
 ```bash
@@ -244,11 +244,11 @@ python -m cProfile -s cumulative slow_script.py
 
 # Results show: 87% of time spent in 10,001 cursor.execute() calls
 # Agent identifies N+1 query problem
-```
+```bash
 
 **Agent Stores Learning in Memory**:
 
-```
+```bash
 🛠️  Using tool: create_entities (trusted) from mcp server memory
  ⋮ 
  ● Running create_entities with the param:
@@ -289,7 +289,7 @@ python -m cProfile -s cumulative slow_script.py
  ⋮      }
  ⋮    ]
  ⋮  }
-```
+```bash
 
 **Agent Proposes Solution**:
 
@@ -322,7 +322,7 @@ def process_records():
     conn.close()
     
     print(f"Processing completed: {processed_count} records in {end_time - start_time:.2f} seconds")
-```
+```bash
 
 This eliminates 10,000 database round-trips, reducing queries from 10,001 to 1, directly addressing the profiling evidence.
 
@@ -344,7 +344,7 @@ placeholders = ','.join(['%s'] * len(record_ids))
 cursor.execute(f"SELECT * FROM test_records WHERE id IN ({placeholders})", record_ids)
 for record in cursor.fetchall():
     processed_count += 1
-```
+```bash
 
 This structured approach identified the real bottleneck and delivered a 60x performance improvement.
 
@@ -375,12 +375,12 @@ In our blog co-authoring workflow, memory stores:
 
 When planning this MCP blog post, memory provided:
 
-```
+```bash
 Previous Context: Kiro CLI agents post exists
 User Preference: Technical accuracy with practical examples
 Content Gap: No coverage of MCP servers specifically
 Relationship: This post complements existing Kiro content
-```
+```bash
 
 This context ensures new content builds on existing work rather than duplicating it.
 

@@ -48,7 +48,7 @@ Writing and maintaining a technical blog can be time-consuming—drafting outlin
 		"--env-file", ".devcontainer/devcontainer.env"
 	]
 }
-```
+```bash
 
 3. We mount the user's AWS credentials and the Kiro CLI config directory into `/home/vscode/.aws` and `/home/vscode/.local/share/kiro-cli` so you can reuse your existing credentials and settings. A memory volume is also mounted for persistent AI context.
 

@@ -18,8 +18,8 @@ validate_frontmatter() {
         return 1
     fi
     
-    # Extract frontmatter
-    local frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | head -n -1 | tail -n +2)
+    # Extract frontmatter (compatible with macOS)
+    local frontmatter=$(awk '/^---$/{flag=!flag; next} flag' "$file")
     
     # Required fields
     local required_fields=("title" "date" "author" "description" "tags" "categories")
@@ -51,8 +51,13 @@ validate_content_structure() {
     local file="$1"
     echo "Validating content structure in: $file"
     
-    # Check for proper heading hierarchy
-    local h1_count=$(grep -c "^# " "$file" || true)
+    # Check for proper heading hierarchy (exclude code blocks)
+    local h1_count=$(awk '
+        /^```/ { in_code = !in_code; next }
+        !in_code && /^# / { count++ }
+        END { print count+0 }
+    ' "$file")
+    
     if [ "$h1_count" -gt 0 ]; then
         echo "⚠️  H1 headings found in content (should use H2-H6 only)"
     fi

@@ -32,7 +32,7 @@ Kiro CLI agents use JSON configuration files with a specific schema. Here are th
   "prompt": "You are a helpful coding assistant",
   "model": "claude-sonnet-4"
 }
-```
+```bash
 
 ### Required Fields
 
@@ -48,7 +48,7 @@ The schema supports many additional optional fields for advanced configuration. 
 kiro-cli chat --agent your-agent
 # Then in the interactive session:
 /agent schema
-```
+```bash
 
 This command provides the authoritative JSON schema reference for all supported configuration options, including:
 - `$schema`: JSON schema reference
@@ -69,7 +69,7 @@ For detailed documentation and examples, refer to the [official Kiro CLI documen
 1. **Create the agent directory structure**:
 ```bash
 mkdir -p .kiro/agents
-```
+```bash
 
 2. **Create your agent configuration** in `.kiro/agents/blog-assistant.json`:
 ```json
@@ -97,7 +97,7 @@ mkdir -p .kiro/agents
     }
   }
 }
-```
+```bash
 
 ## System Prompts and Agent Behavior
 
@@ -109,7 +109,7 @@ The `prompt` field is the most critical part of your agent configuration—it de
 {
   "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Kiro.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
 }
-```
+```bash
 
 ### System Prompt Best Practices
 
@@ -128,7 +128,7 @@ Kiro CLI agents can reference external rule files in two ways:
 {
   "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.kiro/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
 }
-```
+```bash
 
 **Method 2: Direct Resource References**
 ```json
@@ -142,7 +142,7 @@ Kiro CLI agents can reference external rule files in two ways:
     ".kiro/rules/blog-authorship.md"
   ]
 }
-```
+```bash
 
 The `resources` field allows agents to directly access rule files as context, making the guidelines immediately available without requiring the agent to read files manually.
 
@@ -190,7 +190,7 @@ Here's how to add intelligent context gathering to your blog assistant:
     ]
   }
 }
-```
+```bash
 
 ### Hook Configuration Options
 
@@ -213,13 +213,13 @@ Hooks transform your agent from reactive to proactive:
 
 With hooks enabled, your conversations become more intelligent:
 
-```
+```bash
 You: "Create a new post about Docker containers"
 
 Agent: "I see you have 2 draft posts and recently worked on 'kubernetes-basics.md'. 
 Should this Docker post complement that series? Also, I notice you have uncommitted 
 changes in content/posts/ - would you like me to help organize those first?"
-```
+```bash
 
 ### Performance Considerations
 
@@ -249,7 +249,7 @@ kiro-cli --version
 
 # Get help for agent commands
 kiro-cli agent --help
-```
+```bash
 
 ## Common Issues
 
@@ -267,13 +267,13 @@ Once configured and validated, test your agent by starting a chat session:
 
 ```bash
 kiro-cli chat --agent blog-assistant
-```
+```bash
 
 Or if you've set it as your default agent:
 
 ```bash
 kiro-cli chat
-```
+```bash
 
 The CLI will use your specified agent or allow you to select from available agents.
 

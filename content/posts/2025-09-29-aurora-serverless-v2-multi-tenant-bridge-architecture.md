@@ -106,13 +106,13 @@ The Bridge model creates a separate PostgreSQL database for each tenant within a
 - **Simplified Operations**: One cluster to manage instead of multiple separate instances
 - **Cost Efficiency**: Shared infrastructure costs across all tenants
 
-```
+```bash
 Aurora Cluster
 ├── tenant_1_db (Database)
 ├── tenant_2_db (Database)  
 ├── tenant_3_db (Database)
 └── tenant_n_db (Database)
-```
+```bash
 
 ### How It Works
 
@@ -143,7 +143,7 @@ GRANT ALL ON SCHEMA app_data TO acme_user;
 \c tenant_globex_inc
 CREATE SCHEMA app_data;
 GRANT ALL ON SCHEMA app_data TO globex_user;
-```
+```bash
 
 ## Well-Architected Framework Analysis
 
@@ -344,7 +344,7 @@ CREATE ROLE tenant_user;
 GRANT CONNECT ON DATABASE tenant_db TO tenant_user;
 GRANT USAGE ON SCHEMA app_data TO tenant_user;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app_data TO tenant_user;
-```
+```bash
 
 #### Connection Management
 ```python
@@ -357,7 +357,7 @@ def get_tenant_connection(tenant_id):
         user=f"tenant_{tenant_id}_user",
         password=get_tenant_password(tenant_id)
     )
-```
+```bash
 
 #### Monitoring and Alerting
 - Monitor per-tenant resource usage
@@ -435,7 +435,7 @@ This approach creates individual backups for each tenant database during the bac
 for tenant_db in $(psql -h $AURORA_ENDPOINT -t -c "SELECT datname FROM pg_database WHERE datname LIKE 'tenant_%'"); do
     pg_dump -h $AURORA_ENDPOINT -U $DB_USER -Fc $tenant_db > "backups/${tenant_db}_$(date +%Y%m%d_%H%M%S).dump"
 done
-```
+```bash
 
 #### Approach 2: Segregation During Recovery
 
@@ -470,7 +470,7 @@ pg_restore -h production-cluster.cluster-abc.region.rds.amazonaws.com \
 
 # 4. Clean up temporary cluster
 aws rds delete-db-cluster --db-cluster-identifier temp-recovery-cluster
-```
+```bash
 
 ### Aurora Serverless V2 vs Provisioned for Backup Operations
 
@@ -508,7 +508,7 @@ aws rds create-db-cluster \
 
 # Cluster automatically scales down to 0.5 ACU when idle
 # Scales up to 2.0 ACU during active recovery operations
-```
+```bash
 
 ### Best Practices for Bridge Model Backup and Recovery
 
@@ -545,7 +545,7 @@ BEGIN
     RETURN true;
 END;
 $$ LANGUAGE plpgsql;
-```
+```bash
 
 #### Monitoring and Alerting
 - **Backup Success Rates**: Monitor per-tenant backup completion
@@ -575,7 +575,7 @@ psql -h $AURORA_ENDPOINT -U $DB_USER -d "${TENANT_DB}_recovery_test" \
 
 # 4. Clean up test database
 dropdb -h $AURORA_ENDPOINT -U $DB_USER "${TENANT_DB}_recovery_test"
-```
+```bash
 
 For comprehensive guidance on multi-tenant backup and recovery strategies, including detailed implementation examples and cost optimization techniques, refer to the AWS blog post: **[Managed database backup and recovery in a multi-tenant SaaS application](https://aws.amazon.com/blogs/database/managed-database-backup-and-recovery-in-a-multi-tenant-saas-application/)**.
 

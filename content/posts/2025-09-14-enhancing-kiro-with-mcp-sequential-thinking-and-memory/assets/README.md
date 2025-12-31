@@ -35,19 +35,19 @@ docker run --name test-mysql \
   -e MYSQL_DATABASE=testdb \
   -p 3306:3306 \
   -d mysql:8.0
-```
+```bash
 
 ### 2. Install Python Dependencies
 
 ```bash
 pip install mysql-connector-python
-```
+```bash
 
 ### 3. Create Test Data
 
 ```bash
 python create_test_data.py
-```
+```bash
 
 This creates 1 million test records in the database.
 
@@ -56,17 +56,17 @@ This creates 1 million test records in the database.
 **Test the slow script:**
 ```bash
 python slow_script.py
-```
+```bash
 
 **Profile the slow script:**
 ```bash
 python -m cProfile -s cumulative slow_script.py
-```
+```bash
 
 **Test the optimized script:**
 ```bash
 python fast_script_agentic_after_profiling.py
-```
+```bash
 
 ## Expected Results
 
@@ -89,7 +89,7 @@ This example demonstrates how an MCP agent with sequential thinking would:
 ```bash
 docker stop test-mysql
 docker rm test-mysql
-```
+```bash
 
 ## Testing with MCP Demo Assistant
 
@@ -97,7 +97,7 @@ To test this workflow with the MCP demo assistant:
 
 ```bash
 q chat --agent mcp-demo-assistant
-```
+```bash
 
 Then ask: *"My Python script slow_script.py is processing records slowly. Help me optimize it."*
 
