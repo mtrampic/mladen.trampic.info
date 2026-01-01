@@ -1,6 +1,6 @@
 ---
 title: "Enhancing Kiro with MCP: Sequential Thinking and Memory Tools"
-date: 2025-09-14T10:36:00Z
+date: 2025-09-14T10:36:01Z
 draft: false
 description: "Discover how Model Context Protocol (MCP) servers extend Kiro CLI with sequential thinking and memory capabilities for enhanced AI assistance."
 tags: ["Kiro", "MCP", "Model Context Protocol", "Sequential Thinking", "Memory", "AI Tools", "Development"]
