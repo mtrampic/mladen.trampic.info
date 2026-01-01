@@ -48,7 +48,7 @@ Writing and maintaining a technical blog can be time-consuming—drafting outlin
 		"--env-file", ".devcontainer/devcontainer.env"
 	]
 }
-```bash
+```json
 
 3. We mount the user's AWS credentials and the Kiro CLI config directory into `/home/vscode/.aws` and `/home/vscode/.local/share/kiro-cli` so you can reuse your existing credentials and settings. A memory volume is also mounted for persistent AI context.
 
@@ -56,7 +56,7 @@ Writing and maintaining a technical blog can be time-consuming—drafting outlin
 
 - In VS Code's integrated terminal (in the devcontainer), run `kiro-cli chat` to start a conversational session. You can ask it to:
 
-  ```bash
+  ```
   kiro-cli chat "Generate an outline for a blog post about configuring a Hugo devcontainer with AWS and Kiro CLI."
   ```
 
