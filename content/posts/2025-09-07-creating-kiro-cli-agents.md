@@ -4,10 +4,9 @@ date: 2025-09-07T09:57:00Z
 draft: false
 tags: ["AWS", "Kiro", "CLI", "AI", "Development Tools"]
 categories: ["Development"]
-author: "Mladen Trampic & Kiro"
+author: "Mladen Trampic & Kiro Developer"
 authors: ["mladen-trampic", "kiro"]
 description: "Learn how to create and configure custom Kiro CLI agents with proper JSON structure and validation commands."
-series: []
 ---
 
 ## Introduction
@@ -26,19 +25,22 @@ Kiro CLI agents use JSON configuration files with a specific schema. Here are th
 {
   "name": "my-agent",
   "description": "A custom agent for my workflow",
-  "tools": ["read","write"],
-  "allowedTools": ["read"],
+  "tools": ["fs_read", "fs_write", "execute_bash"],
+  "allowedTools": ["fs_read"],
   "resources": ["file://README.md", "file://.kiro/steering/**/*.md"],
   "prompt": "You are a helpful coding assistant",
   "model": "claude-sonnet-4"
 }
-```json
+```
 
 ### Required Fields
 
 - **name**: Unique identifier for your agent
-- **description**: Human-readable description of the agent's purpose
-- **prompt**: Instructions that define how the agent should behave
+
+### Recommended Fields
+
+- **description**: Human-readable description of the agent's purpose (not passed to the model)
+- **prompt**: Instructions that define how the agent should behave (supports inline text or `file://` URI)
 
 ### Optional Fields
 
@@ -97,7 +99,7 @@ mkdir -p .kiro/agents
     }
   }
 }
-```json
+```
 
 ## System Prompts and Agent Behavior
 
@@ -109,7 +111,7 @@ The `prompt` field is the most critical part of your agent configuration—it de
 {
   "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Kiro.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
 }
-```json
+```
 
 ### System Prompt Best Practices
 
@@ -128,7 +130,7 @@ Kiro CLI agents can reference external rule files in two ways:
 {
   "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.kiro/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
 }
-```json
+```
 
 **Method 2: Direct Resource References**
 ```json
@@ -136,13 +138,13 @@ Kiro CLI agents can reference external rule files in two ways:
   "name": "blog-assistant",
   "prompt": "You are a specialized blog assistant for technical content creation.",
   "resources": [
-    ".kiro/rules/blog-principles.md",
-    ".kiro/rules/hugo-content.md", 
-    ".kiro/rules/technical-writing.md",
-    ".kiro/rules/blog-authorship.md"
+    "file://.kiro/rules/blog-principles.md",
+    "file://.kiro/rules/hugo-content.md",
+    "file://.kiro/rules/technical-writing.md",
+    "file://.kiro/rules/blog-authorship.md"
   ]
 }
-```json
+```
 
 The `resources` field allows agents to directly access rule files as context, making the guidelines immediately available without requiring the agent to read files manually.
 
@@ -190,13 +192,13 @@ Here's how to add intelligent context gathering to your blog assistant:
     ]
   }
 }
-```json
+```
 
 ### Hook Configuration Options
 
 Each hook command supports these optional parameters:
 
-- **`timeout_ms`**: Maximum execution time (default: 30,000ms)
+- **`timeout_ms`**: Maximum execution time (default: 10,000ms)
 - **`max_output_size`**: Maximum output size in bytes (default: 10KB)
 - **`cache_ttl_seconds`**: Cache duration to avoid repeated execution (default: 0)
 
@@ -279,9 +281,9 @@ The CLI will use your specified agent or allow you to select from available agen
 
 ## Additional Resources
 
-For deeper insights into Kiro agents and advanced configurations, check out these AWS blog posts:
+For deeper insights into Kiro agents and advanced configurations, check out these resources:
 
-- **[Mastering Kiro with Rules](https://aws.amazon.com/blogs/devops/mastering-amazon-q-developer-with-rules/)** - Learn how to create sophisticated rule-based configurations that enhance Kiro's understanding of your codebase and development practices.
+- **[Kiro CLI Custom Agents Documentation](https://kiro.dev/docs/cli/custom-agents/creating/)** - Official documentation for creating and configuring custom agents.
 
 - **[Overcome Development Disarray with Kiro CLI Custom Agents](https://aws.amazon.com/blogs/devops/overcome-development-disarray-with-kiro-custom-agents/)** - Explore real-world examples of custom agents that streamline development workflows and reduce context switching.
 

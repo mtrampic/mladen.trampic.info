@@ -19,7 +19,7 @@ description: "SEO-optimized description"
 tags: ["tag1", "tag2", "tag3"]
 categories: ["Category"]
 author: "Mladen Trampic & Kiro"
-authors: ["mladen-trampic", "amazon-q-developer-cli"]
+authors: ["mladen-trampic", "kiro"]
 ---
 ```
 
