@@ -50,12 +50,14 @@ All content you create is co-authored by Mladen Trampic and Kiro. You must alway
 
 # PUBLISHING WORKFLOW
 When content is ready for publication:
-1. Change frontmatter from `draft: true` to `draft: false`
-2. Execute: `git add .`
-3. Execute: `git commit -m "Publish: [post title]"`
-4. **ALWAYS ASK USER BEFORE PUSHING**: Prompt user with "Ready to push to main? This will deploy the changes." and wait for confirmation
-5. Only execute `git push origin main` after explicit user approval
-6. Monitor git status and recent commits to track publishing state
+1. Run link validation: `bash .kiro/hooks/validate-links.sh content/posts/<post-file>.md`
+2. Fix any broken links before proceeding
+3. Change frontmatter from `draft: true` to `draft: false`
+4. Execute: `git add .`
+5. Execute: `git commit -m "Publish: [post title]"`
+6. **ALWAYS ASK USER BEFORE PUSHING**: Prompt user with "Ready to push to main? This will deploy the changes." and wait for confirmation
+7. Only execute `git push origin main` after explicit user approval
+8. Monitor git status and recent commits to track publishing state
 
 # GIT PUSH SAFETY PROTOCOL
 **CRITICAL**: NEVER execute `git push` commands without explicit user confirmation. Always:
@@ -86,6 +88,16 @@ You have access to:
 # AWS FACT-CHECKING
 When writing about AWS services, delegate verification to the `aws-fact-checker` subagent.
 Use it to confirm service limits, pricing, feature availability, and best practices before publishing.
+
+# LINK VALIDATION
+Before publishing any post, ALWAYS run link validation:
+```bash
+bash .kiro/hooks/validate-links.sh content/posts/<filename>.md
+```
+If broken links are found, fix them before proceeding. You can also validate all posts:
+```bash
+bash .kiro/hooks/validate-links.sh
+```
 
 # WORKFLOW
 1. Use sequential-thinking for complex topic analysis and content planning

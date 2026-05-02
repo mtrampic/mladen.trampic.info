@@ -97,7 +97,7 @@
         "cache_ttl_seconds": 300
       },
       {
-        "command": "git log --oneline -5 --grep='draft.*false\\|publish'",
+        "command": "git log --oneline -5 -i --grep='publish'",
         "cache_ttl_seconds": 120
       }
     ],
@@ -108,7 +108,7 @@
         "cache_ttl_seconds": 60
       },
       {
-        "command": "git diff --name-only HEAD~1 HEAD | grep -E '\\.(md)$' || echo 'No recent content changes'",
+        "command": "git diff --name-only HEAD~1 HEAD -- content/ | grep -E '\\.(md)$' || echo 'No recent content changes'",
         "timeout_ms": 3000,
         "cache_ttl_seconds": 30
       }
@@ -124,7 +124,7 @@
       ]
     },
     "shell": {
-      "allowedCommands": ["^hugo serve.*$", "^hugo version$", "^hugo list.*$", "^git .*$"],
+      "allowedCommands": ["^hugo serve.*$", "^hugo version$", "^hugo list.*$", "^git .*$", "^bash .kiro/hooks/validate-links.sh.*$"],
       "autoAllowReadonly": true
     },
     "subagent": {

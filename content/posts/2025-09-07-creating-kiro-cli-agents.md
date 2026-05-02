@@ -285,8 +285,6 @@ For deeper insights into Kiro agents and advanced configurations, check out thes
 
 - **[Kiro CLI Custom Agents Documentation](https://kiro.dev/docs/cli/custom-agents/creating/)** - Official documentation for creating and configuring custom agents.
 
-- **[Overcome Development Disarray with Kiro CLI Custom Agents](https://aws.amazon.com/blogs/devops/overcome-development-disarray-with-kiro-custom-agents/)** - Explore real-world examples of custom agents that streamline development workflows and reduce context switching.
-
 ## Conclusion
 
 Custom Kiro CLI agents transform generic AI assistance into specialized, context-aware helpers tailored to your specific workflows. By understanding the JSON configuration structure and validation process, you can create agents that understand your project requirements and provide more relevant assistance. Start with simple configurations and gradually add advanced features like custom tools and MCP servers as your needs evolve.
