@@ -26,3 +26,4 @@ Thumbs.db
 # Credentials/keys/etc
 .env
 devcontainer.env
+.playwright-mcp/

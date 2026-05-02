@@ -1,7 +1,7 @@
 {
   "name": "blog-assistant",
   "description": "Specialized co-author agent for Hugo-based technical blog content creation, research, and management",
-  "prompt": "file://.kiro/prompts/blog-assistant.md",
+  "prompt": "file://../prompts/blog-assistant.md",
   "mcpServers": {
     "memory": {
       "command": "npx",
@@ -61,25 +61,21 @@
   },
   "allowedTools": [
     "@memory",
+    "@sequential-thinking",
     "fs_read",
     "fs_write",
-    "execute_bash",
-    "@sequential-thinking",
+    "subagent",
     "@context7",
     "@modelcontextprotocol-docs/fetch_generic_url_content",
     "@modelcontextprotocol-docs/search_repo_code",
     "@modelcontextprotocol-docs/search_repo_docs",
     "@github/get_file_contents",
-    "@github/create_or_update_file",
     "@github/search_code",
     "@github/search_repositories",
     "@github/list_commits",
     "@github/get_commit",
-    "@github/create_issue",
     "@github/list_issues",
-    "@github/create_pull_request",
-    "@github/list_pull_requests",
-    "@playwright"
+    "@github/list_pull_requests"
   ],
   "resources": [
     "file://.kiro/steering/*.md",
@@ -89,16 +85,13 @@
   "hooks": {
     "agentSpawn": [
       {
-        "command": "git status --porcelain",
-        "cache_ttl_seconds": 30
+        "command": "git status --porcelain"
       },
       {
-        "command": "find content/posts -name '*.md' -mtime -7 | head -5",
-        "cache_ttl_seconds": 300
+        "command": "find content/posts -name '*.md' -mtime -7 | head -5"
       },
       {
-        "command": "git log --oneline -5 -i --grep='publish'",
-        "cache_ttl_seconds": 120
+        "command": "git log --oneline -5 -i --grep='publish'"
       }
     ],
     "userPromptSubmit": [

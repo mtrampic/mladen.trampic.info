@@ -107,9 +107,39 @@ The `prompt` field is the most critical part of your agent configuration—it de
 
 ### Effective System Prompt Structure
 
+For non-trivial prompts, use a `file://` URI pointing to a markdown file. The path is resolved relative to the agent config file's directory (`.kiro/agents/`):
+
 ```json
 {
-  "prompt": "You are a specialized blog co-author assistant working alongside Mladen Trampic to create high-quality technical content for a Hugo-based blog.\n\n# CO-AUTHORSHIP REQUIREMENT\nAll content you create is co-authored by Mladen Trampic and Kiro.\n\n# CORE RESPONSIBILITIES\n- Research and fact-check technical topics using available documentation\n- Create well-structured, engaging blog posts with proper Hugo frontmatter\n- Ensure technical accuracy, especially for AWS and cloud-related content\n- Follow SEO best practices and content optimization guidelines\n\n# QUALITY STANDARDS\n- Technical accuracy is paramount - verify all technical claims\n- Write for both beginners and experienced practitioners\n- Include practical examples and code snippets where relevant\n- Optimize for search engines while maintaining readability"
+  "prompt": "file://../prompts/blog-assistant.md"
+}
+```
+
+The referenced markdown file can use full formatting:
+
+```markdown
+You are a specialized blog co-author assistant working alongside Mladen Trampic
+to create high-quality technical content for a Hugo-based blog.
+
+# CO-AUTHORSHIP REQUIREMENT
+All content you create is co-authored by Mladen Trampic and Kiro.
+
+# CORE RESPONSIBILITIES
+- Research and fact-check technical topics using available documentation
+- Create well-structured, engaging blog posts with proper Hugo frontmatter
+- Ensure technical accuracy, especially for AWS and cloud-related content
+
+# QUALITY STANDARDS
+- Technical accuracy is paramount - verify all technical claims
+- Write for both beginners and experienced practitioners
+- Include practical examples and code snippets where relevant
+```
+
+For simple agents, inline prompts still work:
+
+```json
+{
+  "prompt": "You are a code review assistant focused on security and performance."
 }
 ```
 
@@ -123,16 +153,7 @@ The `prompt` field is the most critical part of your agent configuration—it de
 
 ### Integrating Rules with Agent Configuration
 
-Kiro CLI agents can reference external rule files in two ways:
-
-**Method 1: Reference in System Prompt**
-```json
-{
-  "prompt": "You are a specialized blog assistant. Strictly adhere to all guidelines defined in the `.kiro/rules/` directory, including:\n- blog-principles.md for content quality standards\n- hugo-content.md for Hugo-specific formatting\n- technical-writing.md for writing standards\n- blog-authorship.md for co-authorship requirements"
-}
-```
-
-**Method 2: Direct Resource References**
+Kiro CLI agents can load external rule files using the `resources` field. Resources with `file://` paths are resolved relative to the workspace root and automatically loaded into the agent's context:
 ```json
 {
   "name": "blog-assistant",
@@ -161,10 +182,13 @@ Hooks are one of Kiro CLI's most powerful features, allowing agents to automatic
 
 ### Hook Triggers
 
-Kiro CLI supports two hook triggers:
+Kiro CLI supports five hook triggers:
 
 - **`agentSpawn`**: Runs when the agent starts, providing initial context
 - **`userPromptSubmit`**: Runs before each user message, ensuring fresh context
+- **`preToolUse`**: Runs before a tool executes — can block the tool (exit code 2)
+- **`postToolUse`**: Runs after a tool executes, with access to the tool's output
+- **`stop`**: Runs when the assistant finishes responding — can force continuation
 
 ### Practical Hook Examples
 
@@ -175,12 +199,10 @@ Here's how to add intelligent context gathering to your blog assistant:
   "hooks": {
     "agentSpawn": [
       {
-        "command": "git status --porcelain",
-        "cache_ttl_seconds": 30
+        "command": "git status --porcelain"
       },
       {
-        "command": "find content/posts -name '*.md' -mtime -7 | head -5",
-        "cache_ttl_seconds": 300
+        "command": "find content/posts -name '*.md' -mtime -7 | head -5"
       }
     ],
     "userPromptSubmit": [
@@ -198,7 +220,7 @@ Here's how to add intelligent context gathering to your blog assistant:
 
 Each hook command supports these optional parameters:
 
-- **`timeout_ms`**: Maximum execution time (default: 10,000ms)
+- **`timeout_ms`**: Maximum execution time (default: 30,000ms)
 - **`max_output_size`**: Maximum output size in bytes (default: 10KB)
 - **`cache_ttl_seconds`**: Cache duration to avoid repeated execution (default: 0)
 
@@ -255,13 +277,15 @@ kiro-cli agent --help
 
 ## Common Issues
 
-**YAML vs JSON**: Agent configurations must be in JSON format, not YAML. The CLI expects JSON despite some documentation suggesting YAML support.
+**JSON only**: Agent configurations must be in JSON format. The CLI does not support YAML for agent configs.
 
-**Field Names**: Use `prompt` instead of `instructions` for the agent's system prompt.
+**Prompt file:// resolution**: The `prompt` field's `file://` URIs resolve relative to the agent config file's directory (`.kiro/agents/`), not the workspace root. Use `../` to reach files outside the agents directory (e.g., `file://../prompts/my-prompt.md`).
 
-**Agent Discovery**: While you can specify any path in config.json, Kiro CLI has a discovery preference for the `.kiro/agents/` directory. For best compatibility, place agent files in this standard location rather than custom directories.
+**Resources file:// resolution**: Unlike `prompt`, the `resources` field resolves `file://` paths relative to the workspace root. So `file://.kiro/steering/*.md` works correctly from any agent.
 
-**Tool Permissions**: Include tools in both `tools` and `allowedTools` arrays. Use `toolsSettings` to restrict file operations to safe paths.
+**Agent Discovery**: Kiro CLI discovers workspace agents from the `.kiro/agents/` directory and global agents from `~/.kiro/agents/`. Place agent files in these standard locations.
+
+**Tool Permissions**: Include tools in both `tools` and `allowedTools` arrays. The `tools` list controls visibility; `allowedTools` controls auto-approval without user confirmation. Use `toolsSettings` to restrict file operations to safe paths.
 
 ## Testing Your Agent
 
@@ -278,6 +302,29 @@ kiro-cli chat
 ```
 
 The CLI will use your specified agent or allow you to select from available agents.
+
+## Subagents: Delegating Specialized Work
+
+Agents can invoke other agents as tools using the `subagent` built-in. This enables a modular architecture where a primary agent delegates specialized tasks to focused subagents.
+
+Configure subagent access in `toolsSettings`:
+
+```json
+{
+  "tools": ["fs_read", "fs_write", "execute_bash", "subagent"],
+  "toolsSettings": {
+    "subagent": {
+      "trustedAgents": ["aws-fact-checker"],
+      "availableAgents": ["aws-fact-checker"]
+    }
+  }
+}
+```
+
+- **`availableAgents`**: Which agents can be invoked (supports glob patterns like `"test-*"`)
+- **`trustedAgents`**: Which agents are auto-approved without user confirmation
+
+The subagent itself is a regular agent config in `.kiro/agents/` with its own tools, MCP servers, and prompt. This pattern keeps each agent focused and avoids loading unnecessary MCP servers into the parent agent's context.
 
 ## Additional Resources
 
