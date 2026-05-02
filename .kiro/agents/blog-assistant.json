@@ -1,6 +1,6 @@
 {
   "name": "blog-assistant",
-  "description": "Technical blog co-author for Hugo-based content. Delegates to 'researcher' for multi-source topic research, source gathering, and fact synthesis. Delegates to 'aws-fact-checker' when content makes claims about AWS service features, limits, pricing, or configurations.",
+  "description": "Technical blog co-author for Hugo-based content. Delegates to 'researcher' for multi-source topic research, source gathering, and fact synthesis. Delegates to 'aws-fact-checker' when content makes claims about AWS service features, limits, pricing, or configurations. Delegates to 'kiro-fact-checker' when content makes claims about Kiro CLI features, configuration, hooks, subagents, or behavior.",
   "prompt": "file://../prompts/blog-assistant.md",
   "mcpServers": {
     "sequential-thinking": {
@@ -18,7 +18,8 @@
     "read",
     "write",
     "shell",
-    "subagent"
+    "subagent",
+    "todo_list"
   ],
   "allowedTools": [
     "@sequential-thinking",
@@ -26,7 +27,8 @@
     "read",
     "write",
     "shell",
-    "subagent"
+    "subagent",
+    "todo_list"
   ],
   "resources": [
     "file://.kiro/steering/*.md",
@@ -72,8 +74,8 @@
       "autoAllowReadonly": true
     },
     "subagent": {
-      "trustedAgents": ["aws-fact-checker", "researcher"],
-      "availableAgents": ["aws-fact-checker", "researcher"]
+      "trustedAgents": ["aws-fact-checker", "researcher", "kiro-fact-checker"],
+      "availableAgents": ["aws-fact-checker", "researcher", "kiro-fact-checker"]
     }
   }
 }

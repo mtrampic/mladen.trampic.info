@@ -18,13 +18,13 @@
   "tools": [
     "@sequential-thinking",
     "@memory",
-    "fs_read",
+    "read",
     "execute_bash"
   ],
   "allowedTools": [
     "@sequential-thinking",
     "@memory",
-    "fs_read",
+    "read",
     "execute_bash"
   ]
 }
