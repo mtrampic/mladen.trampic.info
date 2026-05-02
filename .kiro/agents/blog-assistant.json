@@ -1,43 +1,11 @@
 {
   "name": "blog-assistant",
-  "description": "Specialized co-author agent for Hugo-based technical blog content creation, research, and management",
+  "description": "Technical blog co-author for Hugo-based content. Delegates to 'researcher' for multi-source topic research, source gathering, and fact synthesis. Delegates to 'aws-fact-checker' when content makes claims about AWS service features, limits, pricing, or configurations.",
   "prompt": "file://../prompts/blog-assistant.md",
   "mcpServers": {
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "env": {
-        "MEMORY_FILE_PATH": "${HOME}/.memory/blog-assistant-memory.json"
-      }
-    },
     "sequential-thinking": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"]
-    },
-    "modelcontextprotocol-docs": {
-      "command": "npx",
-      "args": [
-        "mcp-remote",
-        "https://gitmcp.io/modelcontextprotocol/modelcontextprotocol"
-      ]
-    },
-    "github": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      }
     },
     "playwright": {
       "command": "npx",
@@ -45,37 +13,20 @@
     }
   },
   "tools": [
-    "@memory",
     "@sequential-thinking",
-    "fs_read",
-    "fs_write",
-    "execute_bash",
-    "@context7",
-    "@modelcontextprotocol-docs",
-    "@github",
     "@playwright",
+    "read",
+    "write",
+    "shell",
     "subagent"
   ],
-  "toolAliases": {
-    "@context7": "research"
-  },
   "allowedTools": [
-    "@memory",
     "@sequential-thinking",
-    "fs_read",
-    "fs_write",
-    "subagent",
-    "@context7",
-    "@modelcontextprotocol-docs/fetch_generic_url_content",
-    "@modelcontextprotocol-docs/search_repo_code",
-    "@modelcontextprotocol-docs/search_repo_docs",
-    "@github/get_file_contents",
-    "@github/search_code",
-    "@github/search_repositories",
-    "@github/list_commits",
-    "@github/get_commit",
-    "@github/list_issues",
-    "@github/list_pull_requests"
+    "@playwright",
+    "read",
+    "write",
+    "shell",
+    "subagent"
   ],
   "resources": [
     "file://.kiro/steering/*.md",
@@ -108,7 +59,7 @@
     ]
   },
   "toolsSettings": {
-    "fs_write": {
+    "write": {
       "allowedPaths": [
         "content/**",
         "static/**",
@@ -121,8 +72,8 @@
       "autoAllowReadonly": true
     },
     "subagent": {
-      "trustedAgents": ["aws-fact-checker"],
-      "availableAgents": ["aws-fact-checker"]
+      "trustedAgents": ["aws-fact-checker", "researcher"],
+      "availableAgents": ["aws-fact-checker", "researcher"]
     }
   }
 }
