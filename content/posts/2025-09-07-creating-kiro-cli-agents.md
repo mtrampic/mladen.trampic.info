@@ -326,6 +326,44 @@ Configure subagent access in `toolsSettings`:
 
 The subagent itself is a regular agent config in `.kiro/agents/` with its own tools, MCP servers, and prompt. This pattern keeps each agent focused and avoids loading unnecessary MCP servers into the parent agent's context.
 
+Here's the `aws-fact-checker` subagent used by this blog's assistant to verify AWS claims before publishing:
+
+```json
+{
+  "name": "aws-fact-checker",
+  "description": "AWS documentation and pricing fact-checker subagent for verifying technical claims",
+  "prompt": "You are an AWS fact-checking specialist. Your role is to verify technical claims about AWS services using official documentation and pricing data.\n\nWhen asked to verify a claim:\n1. Search official AWS documentation for the relevant service\n2. Check pricing data if cost claims are involved\n3. Return a clear verdict: CONFIRMED, INCORRECT, or PARTIALLY CORRECT\n4. Include the source documentation reference\n5. If incorrect, provide the correct information\n\nBe precise and cite specific documentation pages. Do not speculate — if you cannot find confirmation, say so.",
+  "mcpServers": {
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_DOCUMENTATION_PARTITION": "aws"
+      }
+    },
+    "awslabs.aws-pricing-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-pricing-mcp-server@latest"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_REGION": "us-east-1"
+      }
+    }
+  },
+  "tools": [
+    "@awslabs.aws-documentation-mcp-server",
+    "@awslabs.aws-pricing-mcp-server"
+  ],
+  "allowedTools": [
+    "@awslabs.aws-documentation-mcp-server",
+    "@awslabs.aws-pricing-mcp-server"
+  ]
+}
+```
+
+This subagent has access only to AWS documentation and pricing MCP servers — no file system, no shell. The parent blog assistant delegates fact-checking tasks to it, keeping the main agent's context clean while getting authoritative AWS verification.
+
 ## Additional Resources
 
 For deeper insights into Kiro agents and advanced configurations, check out these resources:
